@@ -68,14 +68,15 @@ Dataset yang awalnya tersimpan diluar environment colab(repository github) diimp
 EDA merupakan proses fundamental dalam analytics untuk memahami dan mengeksplorasi data sebelum melakukan modelling. EDA sangat diperlukan dalam analisis karena membantu menghasilkan model yang akurat. Pada proses EDA kali ini, terdapat lima tahapan yang akan dilakukan, yaitu Check characteristic data, Data Assesing, Data Cleaning, Univariate Analysis, dan Multivariate Analysis.
 ### Check characteristic data
 Pada tahap ini, data akan dilihat statistik ssecara umum, singkat, dan informatif. Tujuanya memberikan ringkasan statistik deskriptif dari DataFrame df_early. Ini mencakup statistik seperti mean, median, kuartil, nilai maksimum, dan nilai minimum untuk setiap kolom yang berisi data numerik. Ini adalah langkah awal yang diperlukan dalam eksplorasi dan pemahaman terhadap dataset/dataframe menggunakan metode describe().
-Hasilnya adalah
 ### Data Assesing
 Data Assesing  adalah proses evaluasi dan analisis awal terhadap data untuk memahami karakteristiknya, kualitasnya, dan potensi masalahnya sebelum melakukan analisis lebih lanjut. Pada tahap ini, terdapat tahapan-tahapan yang akan dilakukan secara rinci seperti mengecek missing or null values, mengecek duplikasi data dalam baris, dan mendeteksi outliers. 
 * Checking the missing or null values
 Proses ini melibatkan pengecekan apakah ada nilai yang hilang atau null dalam dataset. Nilai yang hilang dapat mengganggu analisis data karena dapat menyebabkan bias atau kesalahan dalam hasil analisis. Oleh karena itu, penting untuk mengidentifikasi di mana nilai-nilai tersebut hilang dan memutuskan bagaimana cara menangani mereka.
 Dengan menggunakan bantuan metode isna() yang dijumlahkan, hasil terlihat bahwa terdapat missing value pada kolom Engine Fuel Type sebayak 3 sel, Engine HP sebanyak 69 sel, Engine Cylinders 30 sebanyak 30 sel, Number of Doors sebanyak 6 sel, dan Market Category sebanyak 3742 sel.
+Berikut visualisasi dengan bantuan library seaborn pada Gambar 1.
+![Gambar 1](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/image.png).
 
- 
+  Terlihat jelas pada bintik-bintik yang linear dengan nama-kolom mengandung missing value. 
 * Checking the duplicate rows
 Tahap ini bertujuan untuk melihat apakah ada baris data yang identik atau duplikat dalam dataset? Duplikasi data bisa menjadi masalah karena mereka dapat mempengaruhi hasil analisis statistik dengan memberikan bobot tambahan pada observasi yang sama. Mengidentifikasi dan menghapus duplikasi dapat membantu
 memastikan keakuratan analisis data dan mencegah distorsi dalam hasil.
@@ -86,17 +87,33 @@ Kemudian, visualisasi jumlah data dari setiap kolom digunakan untuk melihat perb
 * Detecting Outliers
 Outliers adalah nilai yang menonjol secara statistik berbeda dari mayoritas nilai dalam dataset. Mereka dapat menyebabkan bias dalam analisis statistik atau model yang dibangun dari data tersebut. Outliers juga dapat mengakibatkan testing model menghasilkan overfitting atau underfitting. Maka dari itu, proses ini sangat dibutuhkan.
 Dengan menggunakan library seaborn dengan methodnya boxplot(), parameter di dalamnya dapat disi dengan kolom numerik dari dataset yang digunakan.
-Gambar 2. Adalah salah satu contoh visualisasi keberadaan outlier dari kolom Year.
+Gambar 2. Adalah salah satu contoh visualisasi keberadaan outlier dari kolom Engine HP.
+![Gambar 2](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/outliers.png)
 
-![Gambar 2](https://github.com/Juwono136/predictive-analytics-machine-learning-model/assets/70443393/acf1eb63-dd78-4e1d-ba9e-f5e9acd5d76d)
-
+   Berdasarskan visualisasi untuk mengecek keberadaan outlier diatas, terlihat bahwa terdapat beberapa fitur numerik yang mengandung outlier. Nantinya, Outlier-outlier tersebut akan dihapus menggunakan teknik atau metode IQR. 
 
 ### Data Cleaning
+Data Cleaning adalah proses pembersihan data yang bertujuan untuk memastikan kualitas dan konsistensi data sebelum dilakukan analisis lebih lanjut. Tujuan utamanya adalah untuk menghilangkan masalah atau gangguan dalam dataset yang dapat memengaruhi hasil analisis statistik atau pembangunan model. Pada tahap ini akan dilakukan beberapa proses seperti Renaming the columns, Dropping the missing or null values, Dropping the duplicated rows, dan Handling the outliers. Berikut implemetasi dan hasil yang didapat:
+* Renaming the columns:
+Kenapa proses ini diperlukan? karena pada awalnya, penolahan dataset tidak selamanya melakukan renaming kolom-kolom dengan bahasa yang pasti sesuai dengan kebutuhan bisnis. Maksudnya, penamaan kolom-kolom tersebut bisa jadi mengikuti aturan tertentu sehingga terkesan umum. Meskipun bersifat opsional, proses tersebut dibutuhkan dalam project ini utnuk mengubah kolom MRSP menjadi Harga Jual.
+* Dropping the missing or null values
+Berasarkan tahap sebelumnya, teradapat beberapa missing value yang dapat mengganggu proses analisis dan pembuatan prediktif model. Maka perlu adanya tindakan lebih lanjut untuk menangani keberadaanya, yaitu menghapus missing value. Teknik yang akan digunakan adalah metode dropna() dari library pandas. Hasilnya kolom-kolom yang bermasalah seperti Engine Fuel Type sebayak 3 sel, Engine HP sebanyak 69 sel, Engine Cylinders 30 sebanyak 30 sel, Number of Doors sebanyak 6 sel, dan Market Category sebanyak 3742 sel berhasil dibersihkan.
+Perbedaan yang dapat dibandingkan dengan Gambar 2 sebelumnya bahwa Gambar 3 terlihat bersih.
+![Gambar 3](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/clean.png)
+* Dropping the duplicated rows
+Terlihat di tahap sebelumnya bahwa terdapat data yang terduplikasi. Kali ini, proses lanjutan akan dilakukan untuk mengurangi gangguan yang ada pada data karena jumlahnya yang besar. Dengan menggunakan metode drop_duplicates() dari library pandas ke dataset ini proses menghapus duplikasi data dalam baris berhasil dilakukan. Bukti menunjukan bahwa jumlah data dalam baris berkurang dari yang awalnya 11914 menjadi 7735.
+*  Handling the outliers
+Berdasarkan visualisasi keberadaan outlier di tahap sebelumnya, proses ini penting untuk dilakukan agar akurasi model yang dilatih tidak terpengaruh secara signifikan. Teknik yang akan digunakan seperti yang sudah disinggung sebelumnya, yaitu IQR. Teknik ini mengidentifikasi outlier yang ada dibatas atas Q3 dan dibatas bawah atau Q1. Lalu, nilai-nilai yang ada di dalam batas akan digunakan sementara yang diluar kedua batas atau outlier akan dihapus. Formula yang lebih jelas untuk IQR sebagai berikut:
+$Batas\ bawah = Q1 - 1.5 * IQR$
+$Batas\ atas = Q3 + 1.5 * IQR$
+Hasil dapat terlihat dari pengurangan jumlah data dalam baris yang sebelumnya berjumlah 7735 menjadi 5622. Bukti lebih lanjut terlihat dengan  bantuan metode boxplot dari library seaborn sebagai berikut:
+Gambar 4. ![Gambar 3](![image](https://github.com/Symphoen1x/Dicoding_Expert/assets/116389179/b3d113c5-a607-49ef-8350-b957130aeac3))
+
 ### Exploratory Data Analysis -Univariate Analysis
 ### Exploratory Data Analysis -Multivariate Analysis
 
 ## Data Preparation
-### Encoding Feature Category
+### Encoding Feature Category 
 ### Reduksi Dimensi dengan PCA
 ### Train-Test-Split
 ### Standarisasi
