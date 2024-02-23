@@ -51,8 +51,10 @@ Variabel - variabel yang ada dalam dataset [Car Features and MSRP](https://www.k
 * Popularity: Tingkat popularitas mobil.  Ini adalah Variabel dengan jumlah nilai unik sebanyak 48 dan variabel dengan tipe data numerik.
 * MSRP: Harga jual yang disarankan produsen. Ini adalah variabel target(dependent variable) yang akan diprediksi dalam project ini. 
 
+Informasi di atas diperoleh menggunakan bantuan library pandas melalui metode info(), unique(), dan nunique().
 ### Data Gathering dan Data Loading
-
+Tabel 1. Dataset yang dibentuk menjadi DataFrame di Environment Colab
+Dataset yang awalnya tersimpan diluar environment colab(repository github) diimport lalu dibaca dengan teknik read_csv melalui Pandas Library. DataFrame inilah yang nanti digunakan dalam prose modeling.
 |index|Make|Model|Year|Engine Fuel Type|Engine HP|Engine Cylinders|Transmission Type|Driven\_Wheels|Number of Doors|Market Category|Vehicle Size|Vehicle Style|highway MPG|city mpg|Popularity|MSRP|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 |0|BMW|1 Series M|2011|premium unleaded \(required\)|335\.0|6\.0|MANUAL|rear wheel drive|2\.0|Factory Tuner,Luxury,High-Performance|Compact|Coupe|26|19|3916|46135|
@@ -62,9 +64,23 @@ Variabel - variabel yang ada dalam dataset [Car Features and MSRP](https://www.k
 |4|BMW|1 Series|2011|premium unleaded \(required\)|230\.0|6\.0|MANUAL|rear wheel drive|2\.0|Luxury|Compact|Convertible|28|18|3916|34500|
 |5|BMW|1 Series|2012|premium unleaded \(required\)|230\.0|6\.0|MANUAL|rear wheel drive|2\.0|Luxury,Performance|Compact|Coupe|28|18|3916|31200|
 
-
-
+## Exploratory Data Analysis or (EDA)
+EDA merupakan proses fundamental dalam analytics untuk memahami dan mengeksplorasi data sebelum melakukan modelling. EDA sangat diperlukan dalam analisis karena membantu menghasilkan model yang akurat. Pada proses EDA kali ini, terdapat lima tahapan yang akan dilakukan, yaitu Check characteristic data, Data Assesing, Data Cleaning, Univariate Analysis, dan Multivariate Analysis.
+### Check characteristic data
+Pada tahap ini, data akan dilihat statistik ssecara umum, singkat, dan informatif. Tujuanya memberikan ringkasan statistik deskriptif dari DataFrame df_early. Ini mencakup statistik seperti mean, median, kuartil, nilai maksimum, dan nilai minimum untuk setiap kolom yang berisi data numerik. Ini adalah langkah awal yang diperlukan dalam eksplorasi dan pemahaman terhadap dataset/dataframe menggunakan metode describe().
+Hasilnya adalah
 ### Data Assesing
+Data Assesing  adalah proses evaluasi dan analisis awal terhadap data untuk memahami karakteristiknya, kualitasnya, dan potensi masalahnya sebelum melakukan analisis lebih lanjut. Pada tahap ini, terdapat tahapan-tahapan yang akan dilakukan secara rinci seperti mengecek missing or null values, mengecek duplikasi data dalam baris, dan mendeteksi outliers. 
+* Checking the missing or null values
+Proses ini melibatkan pengecekan apakah ada nilai yang hilang atau null dalam dataset. Nilai yang hilang dapat mengganggu analisis data karena dapat menyebabkan bias atau kesalahan dalam hasil analisis. Oleh karena itu, penting untuk mengidentifikasi di mana nilai-nilai tersebut hilang dan memutuskan bagaimana cara menangani mereka.
+Dengan menggunakan bantuan metode isna() yang dijumlahkan, hasil terlihat bahwa terdapat missing value pada kolom Engine Fuel Type sebayak 3 sel, Engine HP sebanyak 69 sel, Engine Cylinders 30 sebanyak 30 sel, Number of Doors sebanyak 6 sel, dan Market Category sebanyak 3742 sel.
+
+ 
+* Checking the duplicate rows
+Pada tahap ini, kita memeriksa apakah ada baris data yang identik atau duplikat dalam dataset. Duplikasi data bisa menjadi masalah karena mereka dapat mempengaruhi hasil analisis statistik dengan memberikan bobot tambahan pada observasi yang sama. Mengidentifikasi dan menghapus duplikasi dapat membantu memastikan keakuratan analisis data dan mencegah distorsi dalam hasil.
+* Detecting Outliers
+
+
 ### Data Cleaning
 ### Exploratory Data Analysis -Univariate Analysis
 ### Exploratory Data Analysis -Multivariate Analysis
