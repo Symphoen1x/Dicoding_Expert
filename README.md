@@ -106,10 +106,10 @@ Terlihat di tahap sebelumnya bahwa terdapat data yang terduplikasi. Kali ini, pr
 Berdasarkan visualisasi keberadaan outlier di tahap sebelumnya, proses ini penting untuk dilakukan agar akurasi model yang dilatih tidak terpengaruh secara signifikan. Teknik yang akan digunakan seperti yang sudah disinggung sebelumnya, yaitu IQR. Teknik ini mengidentifikasi outlier yang ada dibatas atas Q3 dan dibatas bawah atau Q1. Lalu, nilai-nilai yang ada di dalam batas akan digunakan sementara yang diluar kedua batas atau outlier akan dihapus. Formula yang lebih jelas untuk IQR sebagai berikut:
 $Batas\ bawah = Q1 - 1.5 * IQR$
 $Batas\ atas = Q3 + 1.5 * IQR$
-Hasil dapat terlihat dari pengurangan jumlah data dalam baris yang sebelumnya berjumlah 7735 menjadi 5622. Bukti lebih lanjut terlihat dengan  bantuan metode boxplot dari library seaborn sebagai berikut:
-Gambar 4. ![Gambar 3](![image](https://github.com/Symphoen1x/Dicoding_Expert/assets/116389179/b3d113c5-a607-49ef-8350-b957130aeac3))
+Hasil dapat terlihat dari pengurangan jumlah data dalam baris yang sebelumnya berjumlah 7735 menjadi 5622. 
 
 ### Exploratory Data Analysis -Univariate Analysis
+
 ### Exploratory Data Analysis -Multivariate Analysis
 
 ## Data Preparation
