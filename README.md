@@ -77,8 +77,18 @@ Dengan menggunakan bantuan metode isna() yang dijumlahkan, hasil terlihat bahwa 
 
  
 * Checking the duplicate rows
-Pada tahap ini, kita memeriksa apakah ada baris data yang identik atau duplikat dalam dataset. Duplikasi data bisa menjadi masalah karena mereka dapat mempengaruhi hasil analisis statistik dengan memberikan bobot tambahan pada observasi yang sama. Mengidentifikasi dan menghapus duplikasi dapat membantu memastikan keakuratan analisis data dan mencegah distorsi dalam hasil.
+Tahap ini bertujuan untuk melihat apakah ada baris data yang identik atau duplikat dalam dataset? Duplikasi data bisa menjadi masalah karena mereka dapat mempengaruhi hasil analisis statistik dengan memberikan bobot tambahan pada observasi yang sama. Mengidentifikasi dan menghapus duplikasi dapat membantu
+memastikan keakuratan analisis data dan mencegah distorsi dalam hasil.
+Pada notebook, proses ini menggunakan beberapa metode dari library pandas seperti shape untuk melihat ukuran data dari baris dan kolom, duplicated() untuk melihat data-data yang terduplikasi, dan count() untuk menghitung keseluruhan data dalam baris.
+Hasil/output yang muncul didapat kesimpulan bahwa jumlah data yang terduplikasi adalah 715 data dari seluruh kolom yang berjumlah 16.
+Kemudian, visualisasi jumlah data dari setiap kolom digunakan untuk melihat perbedaan sebelum kolom yang terduplikasi dihapus dan sebagai bukti berhasil atau tidaknya proses tersebut.
+
 * Detecting Outliers
+Outliers adalah nilai yang menonjol secara statistik berbeda dari mayoritas nilai dalam dataset. Mereka dapat menyebabkan bias dalam analisis statistik atau model yang dibangun dari data tersebut. Outliers juga dapat mengakibatkan testing model menghasilkan overfitting atau underfitting. Maka dari itu, proses ini sangat dibutuhkan.
+Dengan menggunakan library seaborn dengan methodnya boxplot(), parameter di dalamnya dapat disi dengan kolom numerik dari dataset yang digunakan.
+Gambar 2. Adalah salah satu contoh visualisasi keberadaan outlier dari kolom Year.
+
+![Gambar 2](https://github.com/Juwono136/predictive-analytics-machine-learning-model/assets/70443393/acf1eb63-dd78-4e1d-ba9e-f5e9acd5d76d)
 
 
 ### Data Cleaning
