@@ -102,13 +102,12 @@ Berasarkan tahap sebelumnya, teradapat beberapa missing value yang dapat menggan
 Gambar 3. Gambar untuk menunjukan perbedaan dari tahap sebelumnya pada data assesing.
 ![Gambar 3](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/clean.png)
 
-  Berdasarkan Gambar 3, perbedaan yang dapat dibandingkan dengan Gambar 2 sebelumnya bahwa Gambar 3 terlihat bersih.
+  Berdasarkan tersebut, perbedaan yang dapat dibandingkan dengan Gambar 2 sebelumnya bahwa Gambar 3 terlihat bersih.
 * Dropping the duplicated rows
 Terlihat di tahap sebelumnya bahwa terdapat data yang terduplikasi. Kali ini, proses lanjutan akan dilakukan untuk mengurangi gangguan yang ada pada data karena jumlahnya yang besar. Dengan menggunakan metode drop_duplicates() dari library pandas ke dataset ini proses menghapus duplikasi data dalam baris berhasil dilakukan. Bukti menunjukan bahwa jumlah data dalam baris berkurang dari yang awalnya 11914 menjadi 7735.
 *  Handling the outliers
 Berdasarkan visualisasi keberadaan outlier di tahap sebelumnya, proses ini penting untuk dilakukan agar akurasi model yang dilatih tidak terpengaruh secara signifikan. Teknik yang akan digunakan seperti yang sudah disinggung sebelumnya, yaitu IQR. Teknik ini mengidentifikasi outlier yang ada dibatas atas Q3 dan dibatas bawah atau Q1. Lalu, nilai-nilai yang ada di dalam batas akan digunakan sementara yang diluar kedua batas atau outlier akan dihapus. Formula yang lebih jelas untuk IQR sebagai berikut:
-$Batas\ bawah = Q1 - 1.5 * IQR$
-$Batas\ atas = Q3 + 1.5 * IQR$.
+$Batas\ bawah = Q1 - 1.5 * IQR$ dan $Batas\ atas = Q3 + 1.5 * IQR$.
 Hasil dapat terlihat dari pengurangan jumlah data dalam baris yang sebelumnya berjumlah 7735 menjadi 5622 dalam bentuk tabel sederhana dengan bantuan metode info().
 Gambar 4. Hasil final setelah proses cleaning data.
 
@@ -116,13 +115,38 @@ Gambar 4. Hasil final setelah proses cleaning data.
 ### Exploratory Data Analysis -Univariate Analysis
 Kenapa Univariate Analysis? jadi tujuan melakukan analysis ini untuk memahami karakteristik dari satu variabel tunggal dalam dataset tanpa ada memperhatikan hubungan variabel lain. Tahap kali ini, Univariate analysis dilakukan dengan memisah categorical feature dengan numerical features.
 * Categorical Features (Fitur Kategorik)
-Proses awal pemisahan kedua fitur menggunakan bantuan metode select_dtypes dengan parameter include untuk categorical features. Lalu, bukti lain dapat terlihat dengan  memvisualisasikan fitur ini secara univariate dengan bantuan metode histogram dari library plotly. Berikut ini adalah salah satu gambar yang dapat dijadikan sampel output.
-![Gambar 4](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/Screenshot%20(247).png).
-Gambar 5. Visualisasi univariate pada kolom 
+Proses awal pemisahan kedua fitur menggunakan bantuan metode select_dtypes dengan parameter include untuk categorical features. Lalu, cara memvvisualisasikan fitur ini secara univariate dapat dilakukan dengan bantuan metode histogram dari library plotly. Berikut ini adalah salah satu gambar yang dapat dijadikan sampel output.
+![Gambar 5](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/newplot.png)
+
+  Gambar 5. Visualisasi univariate pada kolom Make atau Merek.
+  Berdasarkan gambar tersebut, TOp 5 merek mobil yang paling banyak jumlahnya, yaitu Chevrolet, Volkswagen, Cadillac, Infiniti, dan Nissan.
+                
 * Numerical Features (Fitur Numerik)
+Pada Numerical Features, proses pemisahan menggunakan metode select_dtypes dengan parameter exclude untuk melakukan pemilihan tipe data. Cara memvvisualisasikan fitur ini secara univariate dapat dilakukan dengan metode histogram dari library plotly. Berikut ini adalah visualisasi univariate dari kolom-kolom numerik.
+![Gambar 6](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/multivariate.png)
 
+  Gambar 6. Visualisasi univariate analisis pada kolom numerik.
+  Berdasarkan gambar tersebut, histogram pada variabel "Harga_Jual", "highwat MPG", "Engine HP" dan "city mpg" memiliki beberapa karakteristik seperti:
+* Peningkatan harga jual mobil terdistribusi dengan cukup baik. Hal ini dapat dilihat pada histogram dari keempat kolom tersebut yang mana sampel cenderung meningkat lalu mengalami penurunan seiring dengan meningkatnya harga jual rumah.
+* Distribusi harga cenderung cukup normal. Hal ini kemungkinan besar akan berimplikasi pada model.
 ### Exploratory Data Analysis -Multivariate Analysis
+Multivariate Analysis adalah analisis yang memperlihatkan korelasi atau hubungan dua atau lebih variabel. Analysis ini bertujuan untuk memahami hubungan antara dua atau lebih variabel dalam sebuah dataset. Seperti analysis sebelumnya, kali ini juga melakukan pemisahan antara numerical feature dan categorical feature. Nantinya, masing masing feature tersebut akan dianalisis terhadap variabel target, yaitu Harga_Jual.
+* Categorical Features
+Cara memvvisualisasikan fitur ini secara multivariate dapat dilakukan dengan bantuan metode histogram dari library plotly. Bedanya dengan analisis univariate adalah kali ini kita memasukan dua parameter yang diperlukan, yaitu x yang berisi beberapa variabel independent dan y yang berisi variabel dependent atau target (Harga_Jual). Berikut ini adalah salah satu gambar yang dapat dijadikan sampel output.
+![Gambar 7](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/newplot%20(2).png).
 
+  Gambar 7. Visualisasi multivariate Analisis pada kolom Veichle Size.
+  Berdasarkan gambar tersebut dari fitur veichle Size terlihat bahwa pengaruh terhadap terhadap variabel target atau Harga_Jual bervariasi. Misalkan, pada bagian "Midsize" terlihat memiliki korelasi tertinggi dengan variabel target (Harga_Jual), sementara yang lain relatif sama.
+* Numerical Features
+Untuk mengamati hubungan antara fitur numerik, kita akan menggunakan fungsi pairplot(). Kita juga akan mengobservasi korelasi antara fitur numerik dengan fitur target menggunakan fungsi corr(). Berikut adalah gambar dari kedua cara tersebut.
+Gambar 8. Visualisasi multivariate pada numerical features dengan fungsi pairplot().
+![Gambar 8](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/real%20multivariate.png).
+
+  Gambar 9. Visualisasi multivariate pada numerical features dengan fungsi corr().
+![Gambar 9](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/cmaps.png).
+
+Kesimpulan yang bisa diambil berdasarkan kedua teknik tersebut pada numerical feature sebagai berikut:
+*
 ## Data Preparation
 ### Encoding Feature Category 
 ### Reduksi Dimensi dengan PCA
