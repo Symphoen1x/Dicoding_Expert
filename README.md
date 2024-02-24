@@ -168,16 +168,59 @@ PCA bekerja menggunakan metode aljabar linier. Teknik ini mengasumsikan bahwa se
 
 Untuk mengetahui fitur-fitur yang memiliki korelasi tinggi maka dapat didasarkan atas visualisasi dengan fungsi pairplot(). Gambar 8 yang telah ditunjukan sebelumnya akan dijadikan acuan analisis dalam visualisasi ini untuk menentukan fitur mana yang cocok digunakan. Pada gambar tersebut fitur "highway MPG" terhadap fitur "city mpg" memiliki korelasi yang cukup baik dan mengandung informasi yang sama, yaitu luas distribusi berdasarkan fungsi pairplot().
 
+![Gambar 10](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/pairplot%20keren.png).
 
+  Selanjutnya akan dilakukan proses memanggil class PCA() dari library scikit-learn. Paremeter yang akan  dimasukkan ke dalam class adalah n_components dan random_state. Parameter n_components merupakan jumlah komponen atau dimensi, berdasarkan Gambar 10  maka jumlah yang dimasukan ada 2. Kemudian akan muncul hasil berupa array yang merupaakn Principal Component (PC). PC pertama maksudnya informasi mengenai dua fitur diatas sebagian besar terdapat di PC tersebut, sementara sisanya terdapat di PC dua. Pc pertama ini mewakili dua fitur melalui sebuah variabel baru yang bernama "dimension". Berikut dataframe hasil proses PCA.
+Tabel 3. Dataframe hasil akhri dari proses PCA
+|index|Engine HP|Engine Cylinders|Harga\_Jual|Make\_Acura|Make\_Alfa Romeo|Make\_Audi|Make\_BMW|Make\_Buick|Make\_Cadillac|Make\_Chevrolet|Make\_Chrysler|Make\_Dodge|Make\_FIAT|Make\_GMC|Make\_Genesis|Make\_HUMMER|Make\_Honda|Make\_Hyundai|Make\_Infiniti|Make\_Kia|dimension|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|--|
+|0|335\.0|6\.0|46135|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|-1.117210|
+|1|300\.0|6\.0|40650|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|0.452164|
+|2|300\.0|6\.0|36350|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|1.072056|
 ### Train-Test-Split
+Pada awalnya, proses scaling pada seluruh dataset membuat model memiliki informasi mengenai distribusi pada data uji. Informasi tentang data uji (yang seharusnya tidak dilihat oleh model) turut diikutsertakan dalam proses transformasi data latih. Oleh karena itu, kita akan melakukan proses scaling secara terpisah antara data latih dan data uji. Pada tahap kali ini proses pembagian data menjadi data latih dan data uji dengan proporsi 80:20. Hasil yang muncul dari pembagian data diatas, train data sejumlah 4497 dan test data sejumlah 1125 dari total 5622 sampel data. Proses ini dibantu oleh library sklearn dengan modul train_test_split.
 ### Standarisasi
+Standardisasi adalah teknik transformasi yang paling umum digunakan dalam tahap persiapan pemodelan. Teknik ini digunakan untuk transformasi pada feature numerik. StandardScaler melakukan proses standarisasi fitur dengan mengurangkan mean (nilai rata-rata) kemudian membaginya dengan standar deviasi untuk menggeser distribusi. StandardScaler menghasilkan distribusi dengan standar deviasi sama dengan 1 dan mean sama dengan 0. Sekitar 68% dari nilai akan berada di antara -1 dan 1.
 
+Untuk menghindari kebocoran informasi pada data uji, penerapan dilakukan untuk fitur standarisasi pada data latih. Kemudian, pada tahap evaluasi, standarisasi dilakukan pada data uji. 
+Tabel 4. Dataframe hasil akhir setelah proses standarisasi pada fitur numerik.
+|index|Engine HP|Engine Cylinders|dimension|
+|---|---|---|---|
+|3465|-0\.623736691170428|0\.36597140250540167|-1\.6271285525468915|
+|5206|-0\.03471025265858132|0\.36597140250540167|-0\.4812240283983712|
+|11487|-0\.3932480847962271|-1\.0305270252135548|0\.9545158750588465|
+|10798|-1\.0462991361897962|-1\.0305270252135548|0\.922708673076368|
+|1020|-1\.1359335942242075|-1\.0305270252135548|1\.4180144445216696|
+
+  Berdasarkan output diatas, terlihat benar bukan bahwa standarisasi mengubah nilai mean menjadi 0 dan nilai standar devisiasi menjadi 1. Sekitar 68% dari nilai akan berada di antara -1 dan 1.
+
+
+ TO-do:
+* Menjelaskan kelebihan dan kekurangan dari setiap algoritma yang digunakan.
+
+* Jika menggunakan satu algoritma pada solution statement, lakukan proses improvement terhadap model dengan hyperparameter tuning. Jelaskan proses improvement yang dilakukan.
+
+* Jika menggunakan dua atau lebih algoritma pada solution statement, maka pilih model terbaik sebagai solusi. Jelaskan mengapa memilih model tersebut sebagai model terbaik.
+
+  
 ## Model Devlopment
+Proses kali ini menunjukan penggunaan machine learning dengan beberapa Algoritma yang akan digunakan. Algoritma yang akan digunakan pada proses Model Devploment kali ini ada tiga, yaitu K-Nearest Neighbor, Random Forest, dan Boosting Algorithm. Sebelum itu, pembuatan DataFrame yang berisi ketiga algoritma diatas untuk membandingkan hasil prediksi terbaik perlu dibuat. Tidak lupa untuk menggunakan hyperparameter tuning GridSearch dalam proses pelatihan model dengan kaetiga algoritma tersebut. Tujuanya untuk mengingkatkan performa model yang dilatih.
 ### Model Devlopment Menggunakan Algoritma K-Nearest Neighbor atau KNN
-### Model Devlopment Menggunakan Algoritma Random Forest
-### Model Devlopment Menggunakan Algoritma Boosting Algorithm
+KNN adalah algoritma yang relatif sederhana dibandingkan dengan algoritma lain. Algoritma KNN menggunakan ‘kesamaan fitur’ untuk memprediksi nilai dari setiap data yang baru. Dengan kata lain, setiap data baru diberi nilai berdasarkan seberapa mirip titik tersebut dalam set pelatihan.
 
+Kali ini, modelling dengan Algoritma KNN akan menggunakan bantuan hyperparameter tuning untuk menemukan kombinasi nilai optimal untuk hyperparameter dari sebuah model machine learning dengan tujuan meningkatkan performa model.
+### Model Devlopment Menggunakan Algoritma Random Forest
+Random forest merupakan salah satu model machine learning yang termasuk ke dalam kategori ensemble (group) learning. Apa itu model ensemble? Sederhananya, ia merupakan model prediksi yang terdiri dari beberapa model dan bekerja secara bersama-sama.
+
+Kali ini, modelling dengan Algoritma Random Forest akan menggunakan bantuan hyperparameter tuning untuk menemukan kombinasi nilai optimal untuk hyperparameter dari sebuah model machine learning dengan tujuan meningkatkan performa model.
+### Model Devlopment Menggunakan Algoritma Boosting Algorithm
+Algoritme boosting menggabungkan beberapa pembelajar lemah dalam metode berurutan, yang secara iteratif. Pendekatan ini membantu mengurangi bias tinggi yang umum terjadi pada model machine learning. Cara kerjanya adalah membuat model kedua yang bertugas memperbaiki kesalahan dari model pertama. Model ditambahkan sampai data latih terprediksi dengan baik atau telah mencapai jumlah maksimum model untuk ditambahkan.
+
+Kali ini, modelling dengan Boosting Algorithm akan menggunakan bantuan hyperparameter tuning untuk menemukan kombinasi nilai optimal untuk hyperparameter dari sebuah model machine learning dengan tujuan meningkatkan performa model.
 ## Evaluasi Model
+Tahap evaluasi dalam membangun model bertujuan untuk mengukur kinerja dan keefektifan model yang telah dibuat. Evaluasi model penting karena memberikan pemahaman tentang seberapa baik model dapat melakukan prediksi atau menggeneralisasi data baru yang tidak terlihat selama pelatihan. Pada tahap ini, penggunaan metrik akan dilakukan. Metrik yang akan digunakan adalah Mean Squared Eror atau MSE. Metrik ini menghitung jumlah selisih kuadrat rata-rata nilai sebenarnya dengan nilai prediksi melalui sebuah persamaan.
+
+Jadi, proses dalam tahap evaluasi adalah scaling numeric features, count MSE for data train and test, plot metrix with bar chart, prediction target variable, Calculates the difference between the predicted value and the y_true value, model accuracy with difference algorithm, and
 ### Scaling numeric features
 ### Count MSE for data train and test
 ### Plot metrix with bar chart
