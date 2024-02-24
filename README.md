@@ -77,7 +77,7 @@ Dengan menggunakan bantuan metode isna() yang dijumlahkan, hasil terlihat bahwa 
 Berikut visualisasi dengan bantuan library seaborn pada Gambar 1.
 ![Gambar 1](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/image.png).
 
-  Terlihat jelas pada bintik-bintik yang linear dengan nama-kolom mengandung missing value. 
+  Berdasarkan Gambar 1, terlihat jelas pada bintik-bintik yang linear dengan nama-kolom mengandung missing value. 
 * Checking the duplicate rows
 Tahap ini bertujuan untuk melihat apakah ada baris data yang identik atau duplikat dalam dataset? Duplikasi data bisa menjadi masalah karena mereka dapat mempengaruhi hasil analisis statistik dengan memberikan bobot tambahan pada observasi yang sama. Mengidentifikasi dan menghapus duplikasi dapat membantu
 memastikan keakuratan analisis data dan mencegah distorsi dalam hasil.
@@ -88,10 +88,10 @@ Kemudian, visualisasi jumlah data dari setiap kolom digunakan untuk melihat perb
 * Detecting Outliers
 Outliers adalah nilai yang menonjol secara statistik berbeda dari mayoritas nilai dalam dataset. Mereka dapat menyebabkan bias dalam analisis statistik atau model yang dibangun dari data tersebut. Outliers juga dapat mengakibatkan testing model menghasilkan overfitting atau underfitting. Maka dari itu, proses ini sangat dibutuhkan.
 Dengan menggunakan library seaborn dengan methodnya boxplot(), parameter di dalamnya dapat disi dengan kolom numerik dari dataset yang digunakan.
-Gambar 2. Adalah salah satu contoh visualisasi keberadaan outlier dari kolom Engine HP.
+Gambar 2. Salah satu contoh visualisasi keberadaan outlier dari kolom Engine HP.
 ![Gambar 2](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/outliers.png)
 
-   Berdasarskan visualisasi untuk mengecek keberadaan outlier diatas, terlihat bahwa terdapat beberapa fitur numerik yang mengandung outlier. Nantinya, Outlier-outlier tersebut akan dihapus menggunakan teknik atau metode IQR. 
+   Berdasarskan visualisasi pada gambar 2, terlihat bahwa terdapat beberapa fitur numerik yang mengandung outlier. Nantinya, Outlier-outlier tersebut akan dihapus menggunakan teknik atau metode IQR. 
 
 ### Data Cleaning
 Data Cleaning adalah proses pembersihan data yang bertujuan untuk memastikan kualitas dan konsistensi data sebelum dilakukan analisis lebih lanjut. Tujuan utamanya adalah untuk menghilangkan masalah atau gangguan dalam dataset yang dapat memengaruhi hasil analisis statistik atau pembangunan model. Pada tahap ini akan dilakukan beberapa proses seperti Renaming the columns, Dropping the missing or null values, Dropping the duplicated rows, dan Handling the outliers. Berikut implemetasi dan hasil yang didapat:
@@ -99,18 +99,27 @@ Data Cleaning adalah proses pembersihan data yang bertujuan untuk memastikan kua
 Kenapa proses ini diperlukan? karena pada awalnya, penolahan dataset tidak selamanya melakukan renaming kolom-kolom dengan bahasa yang pasti sesuai dengan kebutuhan bisnis. Maksudnya, penamaan kolom-kolom tersebut bisa jadi mengikuti aturan tertentu sehingga terkesan umum. Meskipun bersifat opsional, proses tersebut dibutuhkan dalam project ini utnuk mengubah kolom MRSP menjadi Harga Jual.
 * Dropping the missing or null values
 Berasarkan tahap sebelumnya, teradapat beberapa missing value yang dapat mengganggu proses analisis dan pembuatan prediktif model. Maka perlu adanya tindakan lebih lanjut untuk menangani keberadaanya, yaitu menghapus missing value. Teknik yang akan digunakan adalah metode dropna() dari library pandas. Hasilnya kolom-kolom yang bermasalah seperti Engine Fuel Type sebayak 3 sel, Engine HP sebanyak 69 sel, Engine Cylinders 30 sebanyak 30 sel, Number of Doors sebanyak 6 sel, dan Market Category sebanyak 3742 sel berhasil dibersihkan.
-Perbedaan yang dapat dibandingkan dengan Gambar 2 sebelumnya bahwa Gambar 3 terlihat bersih.
+Gambar 3. Gambar untuk menunjukan perbedaan dari tahap sebelumnya pada data assesing.
 ![Gambar 3](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/clean.png)
+
+  Berdasarkan Gambar 3, perbedaan yang dapat dibandingkan dengan Gambar 2 sebelumnya bahwa Gambar 3 terlihat bersih.
 * Dropping the duplicated rows
 Terlihat di tahap sebelumnya bahwa terdapat data yang terduplikasi. Kali ini, proses lanjutan akan dilakukan untuk mengurangi gangguan yang ada pada data karena jumlahnya yang besar. Dengan menggunakan metode drop_duplicates() dari library pandas ke dataset ini proses menghapus duplikasi data dalam baris berhasil dilakukan. Bukti menunjukan bahwa jumlah data dalam baris berkurang dari yang awalnya 11914 menjadi 7735.
 *  Handling the outliers
 Berdasarkan visualisasi keberadaan outlier di tahap sebelumnya, proses ini penting untuk dilakukan agar akurasi model yang dilatih tidak terpengaruh secara signifikan. Teknik yang akan digunakan seperti yang sudah disinggung sebelumnya, yaitu IQR. Teknik ini mengidentifikasi outlier yang ada dibatas atas Q3 dan dibatas bawah atau Q1. Lalu, nilai-nilai yang ada di dalam batas akan digunakan sementara yang diluar kedua batas atau outlier akan dihapus. Formula yang lebih jelas untuk IQR sebagai berikut:
 $Batas\ bawah = Q1 - 1.5 * IQR$
-$Batas\ atas = Q3 + 1.5 * IQR$
-Hasil dapat terlihat dari pengurangan jumlah data dalam baris yang sebelumnya berjumlah 7735 menjadi 5622.
-![Gambar 4](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/clean.png)
-### Exploratory Data Analysis -Univariate Analysis
+$Batas\ atas = Q3 + 1.5 * IQR$.
+Hasil dapat terlihat dari pengurangan jumlah data dalam baris yang sebelumnya berjumlah 7735 menjadi 5622 dalam bentuk tabel sederhana dengan bantuan metode info().
+Gambar 4. Hasil final setelah proses cleaning data.
 
+![Gambar 4](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/Screenshot%20(247).png).
+### Exploratory Data Analysis -Univariate Analysis
+Kenapa Univariate Analysis? jadi tujuan melakukan analysis ini untuk memahami karakteristik dari satu variabel tunggal dalam dataset tanpa ada memperhatikan hubungan variabel lain. Tahap kali ini, Univariate analysis dilakukan dengan memisah categorical feature dengan numerical features.
+* Categorical Features (Fitur Kategorik)
+Proses awal pemisahan kedua fitur menggunakan bantuan metode select_dtypes dengan parameter include untuk categorical features. Lalu, bukti lain dapat terlihat dengan  memvisualisasikan fitur ini secara univariate dengan bantuan metode histogram dari library plotly. Berikut ini adalah salah satu gambar yang dapat dijadikan sampel output.
+![Gambar 4](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/Screenshot%20(247).png).
+Gambar 5. Visualisasi univariate pada kolom 
+* Numerical Features (Fitur Numerik)
 
 ### Exploratory Data Analysis -Multivariate Analysis
 
