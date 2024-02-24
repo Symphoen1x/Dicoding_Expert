@@ -145,11 +145,30 @@ Gambar 8. Visualisasi multivariate pada numerical features dengan fungsi pairplo
   Gambar 9. Visualisasi multivariate pada numerical features dengan fungsi corr().
 ![Gambar 9](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/cmaps.png).
 
-Kesimpulan yang bisa diambil berdasarkan kedua teknik tersebut pada numerical feature sebagai berikut:
-*
+  Kesimpulan yang bisa diambil berdasarkan kedua teknik tersebut pada numerical feature sebagai berikut:
+* Kolom yang memiliki korelasi tertinggi dengan variabel target(Harga_Jual) adalah Engine Hp dengan skor korelasi diatas 70%.
+* Dapat disimpulkan bahwa kolom-kolom yang berkorelasi sedang dengan variabel target Harga_Jual adalah higway MPG, city mpg, dan Engine Cylinders.
+* Dapat disimpulkan bahwa kolom-kolom yang berkorelasi rendah dengan variabel target Harga_Jual adalah Popularity, Year, dan Number of Doors. Lalu, kolom-kolom yang memiliki korelasi rendah ini nantinya akan dihapus karena dapat mempengaruhi kinerja model dalam memprediksi variabel target Harga_Jual. Dengan menghapus kolom-kolom yang memiliki korelasi rendah,  teknik dapat mengurangi dimensi fitur dan meningkatkan performa model dapat dilakukan dalam proses pembelajaran dan prediksi.
 ## Data Preparation
+Data preparation merupakan tahapan penting dalam proses pengembangan model machine learning. Ini adalah tahap di mana  proses transformasi pada data akan dilakukan dengan menjadikan data ke bentuk yang cocok untuk proses pemodelan. Terdapat beberapa tahapan di dalamnya Encoding fitur kategori, Reduksi dimensi dengan PCA, proporsi dataset dengan fungsi train_test_split, dan Standarisasi.
 ### Encoding Feature Category 
+Ini adalah proses mengubah fitur kategorikal atau kualitatif menjadi representasi numerik yang dapat dimengerti oleh algoritma machine learning. Fitur kategorikal adalah fitur yang memiliki nilai dalam kategori atau kelompok tertentu tanpa urutan yang terdefinisi. Proses ini menggunakan teknik one-hot-encoding dengan tujuan untuk mendapatkan fitur baru yang sesuai. Fitur baru ini nantinya dapat digunakan untuk mewakili fitur kategori. Untuk teknik one-hot encoding ini, metode yang dibutuhkan adalah concat dan get_dummies dari library Scikit-learn. Berikut adalah tabel sebagai hasil/output dari proses diatas:
+Tabel 2. Hasil dari proses Encoding Feature Category.
+|index|Engine HP|Engine Cylinders|highway MPG|city mpg|Harga\_Jual|Make\_Acura|Make\_Alfa Romeo|Make\_Audi|Make\_BMW|Make\_Buick|Make\_Cadillac|Make\_Chevrolet|Make\_Chrysler|Make\_Dodge|Make\_FIAT|Make\_GMC|Make\_Genesis|Make\_HUMMER|Make\_Honda|Make\_Hyundai|
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+|0|335\.0|6\.0|26|19|46135|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|
+|1|300\.0|6\.0|28|19|40650|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|
+|2|300\.0|6\.0|28|20|36350|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|
+|3|230\.0|6\.0|28|18|29450|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|
+|4|230\.0|6\.0|28|18|34500|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|
 ### Reduksi Dimensi dengan PCA
+Teknik reduksi (pengurangan) dimensi adalah prosedur yang mengurangi jumlah fitur dengan tetap mempertahankan informasi pada data. Teknik pengurangan dimensi yang paling populer adalah Principal Component Analysis atau disingkat menjadi PCA. Ia adalah teknik untuk mereduksi dimensi, mengekstraksi fitur, dan mentransformasi data dari “n-dimensional space” ke dalam sistem berkoordinat baru dengan dimensi m, di mana m lebih kecil dari n.  Hal ini sangat penting karena jika dataset memiliki banyak fitur yang mempersulit analisis, hal tersebut dapat menyebabkan overfitting atau masalah lain.
+
+PCA bekerja menggunakan metode aljabar linier. Teknik ini mengasumsikan bahwa sekumpulan data pada arah dengan varians terbesar merupakan yang paling penting (utama). PCA umumnya digunakan ketika fitur dalam data memiliki korelasi yang tinggi. Korelasi tinggi ini menunjukkan data yang berulang atau redundant. 
+
+Untuk mengetahui fitur-fitur yang memiliki korelasi tinggi maka dapat didasarkan atas visualisasi dengan fungsi pairplot(). Gambar 8 yang telah ditunjukan sebelumnya akan dijadikan acuan analisis dalam visualisasi ini untuk menentukan fitur mana yang cocok digunakan. Pada gambar tersebut fitur "highway MPG" terhadap fitur "city mpg" memiliki korelasi yang cukup baik dan mengandung informasi yang sama, yaitu luas distribusi berdasarkan fungsi pairplot().
+
+
 ### Train-Test-Split
 ### Standarisasi
 
