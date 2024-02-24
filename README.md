@@ -67,7 +67,8 @@ Dataset yang awalnya tersimpan diluar environment colab(repository github) diimp
 ## Exploratory Data Analysis or (EDA)
 EDA merupakan proses fundamental dalam analytics untuk memahami dan mengeksplorasi data sebelum melakukan modelling. EDA sangat diperlukan dalam analisis karena membantu menghasilkan model yang akurat. Pada proses EDA kali ini, terdapat lima tahapan yang akan dilakukan, yaitu Check characteristic data, Data Assesing, Data Cleaning, Univariate Analysis, dan Multivariate Analysis.
 ### Check characteristic data
-Pada tahap ini, data akan dilihat statistik ssecara umum, singkat, dan informatif. Tujuanya memberikan ringkasan statistik deskriptif dari DataFrame df_early. Ini mencakup statistik seperti mean, median, kuartil, nilai maksimum, dan nilai minimum untuk setiap kolom yang berisi data numerik. Ini adalah langkah awal yang diperlukan dalam eksplorasi dan pemahaman terhadap dataset/dataframe menggunakan metode describe().
+Pada tahap ini, data akan dilihat statistik ssecara umum, singkat, dan informatif. Tujuanya memberikan ringkasan statistik deskriptif dari DataFrame df_early. Ini mencakup statistik seperti mean, median, kuartil atas 75%, kuartil tengah 50%, kuartil bawah 25%, standar devisiasi,  nilai maksimum, dan nilai minimum untuk setiap kolom yang berisi data numerik. Ini adalah langkah awal yang diperlukan dalam eksplorasi dan pemahaman terhadap dataset/dataframe menggunakan metode describe().
+Count adalah jumlah sampel pada data.
 ### Data Assesing
 Data Assesing  adalah proses evaluasi dan analisis awal terhadap data untuk memahami karakteristiknya, kualitasnya, dan potensi masalahnya sebelum melakukan analisis lebih lanjut. Pada tahap ini, terdapat tahapan-tahapan yang akan dilakukan secara rinci seperti mengecek missing or null values, mengecek duplikasi data dalam baris, dan mendeteksi outliers. 
 * Checking the missing or null values
@@ -106,9 +107,10 @@ Terlihat di tahap sebelumnya bahwa terdapat data yang terduplikasi. Kali ini, pr
 Berdasarkan visualisasi keberadaan outlier di tahap sebelumnya, proses ini penting untuk dilakukan agar akurasi model yang dilatih tidak terpengaruh secara signifikan. Teknik yang akan digunakan seperti yang sudah disinggung sebelumnya, yaitu IQR. Teknik ini mengidentifikasi outlier yang ada dibatas atas Q3 dan dibatas bawah atau Q1. Lalu, nilai-nilai yang ada di dalam batas akan digunakan sementara yang diluar kedua batas atau outlier akan dihapus. Formula yang lebih jelas untuk IQR sebagai berikut:
 $Batas\ bawah = Q1 - 1.5 * IQR$
 $Batas\ atas = Q3 + 1.5 * IQR$
-Hasil dapat terlihat dari pengurangan jumlah data dalam baris yang sebelumnya berjumlah 7735 menjadi 5622. 
-
+Hasil dapat terlihat dari pengurangan jumlah data dalam baris yang sebelumnya berjumlah 7735 menjadi 5622.
+![Gambar 4](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/clean.png)
 ### Exploratory Data Analysis -Univariate Analysis
+
 
 ### Exploratory Data Analysis -Multivariate Analysis
 
