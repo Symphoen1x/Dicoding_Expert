@@ -267,20 +267,50 @@ Keterangan:
 - yi = nilai sebenarnya
 - y_pred = nilai prediksi
 
-Selanjutnya, beberapa proses dalam tahap evaluasi yang akan dilakukan adalah scaling numeric features, count MSE for data train and test, plot metrix with bar chart, prediction target variable, Calculates the difference between the predicted value and the y_true value, and Model Accuracy Based on Each Algorithm.
+Selanjutnya, beberapa proses dalam tahap evaluasi yang akan dilakukan adalah scaling numeric features, count MSE for data train and test, prediction target variable, Calculates the difference between the predicted value and the y_true value, and Model Accuracy Based on Each Algorithm.
 ### Scaling numeric features
 Sebelum menghitung nilai MSE, proses scaling akan dilakukan untuk fitur numerik pada data uji. Karena sebelumnya, pada proses scaling hanya pada data latih saja. Setelah model dilatih menggunakan 3 algoritma yaitu KNN, Random Forest dan AdaBoost, proses scaling fitur akan dilakukan pada data uji. Hal ini harus dilakukan agar skala antara data latih dan data uji sama sehingga evaluasi dapat berjalan.
 ### Count MSE for data train and test
-Proses perhitungan nilai MSE dimulai dengan pembuatan DataFrame yang memiliki kolom 'train' dan 'test' serta indeks 'KNN', 'RF', dan 'Boosting'. DataFrame ini akan digunakan untuk menyimpan nilai MSE untuk setiap algoritma pada data latih (train) dan data uji (test). Selanjutnya, dalam iterasi, setiap indeks yang mewakili algoritma akan digunakan untuk menghitung nilai MSE menggunakan data latih dan data uji sebagai input. Berikut hasil dataframe setelah dilakukan perhitungan nilai mse untuk setiap algoritma pada data latih dan data uji.
+Proses perhitungan nilai MSE dimulai dengan pembuatan DataFrame yang memiliki kolom 'train' dan 'test' serta indeks 'KNN', 'RF', dan 'Boosting'. DataFrame ini akan digunakan untuk menyimpan nilai MSE untuk setiap algoritma pada data latih (train) dan data uji (test). Selanjutnya, dalam iterasi, setiap indeks yang mewakili algoritma akan digunakan untuk menghitung nilai MSE menggunakan data latih dan data uji sebagai input. Berikut Tabel 5 hasil dataframe setelah dilakukan perhitungan nilai mse untuk setiap algoritma pada data latih dan data uji. 
 |Nama Algoritma|train|test| 
 |---|---|---|
 |KNN|16232.637486|18914.353625|18914.353625|
 |RandomForest|5732.779149|13660.525417|
 |Boosting|69324.69636|70718.092728|
-### Prediction target variable
-Tahapan plot visualisasi sederhana untuk memudahkan dalam pembacaan hasil diatas.
-![Gambar 11](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/pairplot%20keren.png).
-### Calculates the difference between the predicted value and the y_true value
-### Accuracy Model with difference algorithm
 
+Tahapan plot visualisasi sederhana untuk memudahkan dalam pembacaan hasil diatas.
+![Gambar 11](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/last.png).
+
+Dari gambar di atas, terlihat bahwa, model Random Forest (RF) memberikan nilai eror yang paling kecil dibandingkan algoritma lain seperti KNN dan Boosting Algorithm. Sedangkan model dengan algoritma Boosting memiliki eror yang paling besar (berdasarkan grafik, angkanya di atas 60000). Maka dari itu,  model Random Forest yang akan dipilih sebagai model terbaik untuk memprediksi harga jual mobil.
+### Prediction target variable
+Tabel 7. Hasil prediksi nilai target berdasarkan ketiga model algoritma(KNN, RandomForest,dan Boosting) menggunakan beberapa harga dari data test.
+
+|index|y\_true|prediksi\_KNN|prediksi\_RandomForest|prediksi\_Boosting|
+|---|---|---|---|---|
+|2992|68855|68385\.0|69552\.0|60912\.8|
+|4110|78570|78747\.5|77826\.1|64950\.9|
+|513|60900|65735\.0|56873\.0|40997\.6|
+|11298|30045|33090\.5|34084\.4|39771\.3|
+|10525|29420|25880\.5|28549\.2|39609\.6|
+|10259|64085|55512\.5|59280\.7|54899\.2|
+|441|41850|43285\.0|39066\.2|39879\.0|
+|11218|21650|20650\.0|18870\.5|21839\.4|
+|523|57350|62640\.0|59647\.6|44905\.2|
+|5689|46635|53714\.0|45180\.4|39771\.3|
+
+Tabel diatas dapat digunakan 
+### Calculates the difference between the predicted value and the y_true value
+Tujuan dari perhitungan rata-rata selisih antara nilai sebenarnya dan nilai prediksi dari ketiga model adalah untuk membandingkan performa relatif dari ketiga model tersebut. Ketiga model tersebut memiliki nilai absolut dari rata-rata selisih antara nilai aktual (y_true). Nilai prediksi yang terkecil mengindikasikan bahwa model cenderung memiliki kinerja yang lebih baik. Dalam konteks prediksi, nilai selisih yang lebih kecil menunjukkan bahwa prediksi model lebih mendekati nilai aktual. Hasil yang muncul tetap sama bahwa model dengan RandomForestlah yang tetap menjadi model terbaik dengan nilai rata-rata selisih terkecil sebanyak 2449.79, disusul oleh MOdel KNN sebanyak 3544.4, dan terakhir oleh Boosting sebanyak 9203.43.
+### Accuracy Model with difference algorithm
+Metode [Score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.accuracy_score.html) dari library skcit-learn dapat membantu dalam pemilihan model terbaik untuk digunakan dalam suatu tugas atau masalah tertentu seperti regresi. Model dengan skor yang lebih tinggi cenderung memberikan prediksi yang lebih baik atau hasil yang lebih akurat.
+
+Berdasarkan hasil perbadingan ketiga model, terlihat kembali bahwa pada bagian akurasi model menggunakan algoritma Random Forest menghasilkan skor yang cukup baik, yaitu 0.9313177979043304. Skor model ini menjadi yang terbaik diantara kedua model lain.
 ## Conclusion
+Berdasarkan beberapa tahapan yang telah dilakukan, kesimpulan diperoleh sebagai berikut:
+
+* Pemahaman mengenai Domain Proyek yang berisi latar belakang proyek, tujuan dan kebutuhan proyek, dan riset atau sumber referensi yang relevan dengan proyek telah disertakan.
+* Pemahaman mengenai kasus bisnis yang berisi problem statemnets, goals, dan solution statements telah terselesaikan dan terbuktikan hasilnya.
+* Pendeskripsian dan pemahaman mengenai informasi data-data, sumber dara, visualisasi data dan fitur/variabel yang digunakan sangat mendukung tahap-tahap pra-permodelan.
+* Tahapan persiapan data yang terdiri Encoding fitur kategori, reduksi dengan Principal Component Analysis(PCA), Pembagian dataset, dan teknik standarisasi berhasil untuk dilakukan.
+* Proses modeling melalui perbandingan tiga algoritma regresi seperti K-Nearest Neighbor, Random Forest, dan Bosting Algorithm menjadi acuan dalam pemilihan model proyek.
+* Tahap evaluasi model menunjukan hasil yang berbeda-beda dengan terpilihnya Model Random Forest sebagai model terbaik untuk prediksi harga jual proyek ini.
