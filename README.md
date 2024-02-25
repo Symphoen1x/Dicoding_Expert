@@ -6,6 +6,8 @@ Dalam industri otomotif, harga jual mobil ditentukan oleh banyak faktor seperti 
 
 Dengan memanfaatkan data histori harga jual dan spesifikasi mobil, sistem predictive modelling dapat dibangun untuk memprediksi harga jual mobil berdasarkan fitur-fitur tertentu menggunakan machine learning. Menurut jurnal yang berjudul [Prediksi Harga Mobil Bekas dengan Machine Learning](https://jurnal.syntaxliterate.co.id/index.php/syntax-literate/article/view/2716), teknik Machine Learning dapat dimanfaatkan dalam melakukan prediksi harga mobil bekas agar menghasilkan akurasi yang cukup baik.
 
+
+
 Beberapa algoritma machine learning yang dapat digunakan antara lain random forest, K-Nearest Neighbors atau KNN, dan Boosting. Penelitian yang berjudul [Used Car Price Prediction with Random Forest Regressor Model](https://journal.stmikjayakarta.ac.id/index.php/jisicom/article/view/752/506) memperkuat gagasan tersebut bahwa Random Forest yang digunakan dalam permodelan kasus prediksi mampu menghasilkan prediksi harga jual mobil bekas dengan akurasi yang baik. Selain itu, penelitian lain yang berjudul [Komparasi Algoritma K-NearestNeighbors dan Random Forest Pada Prediksi Harga Mobil Bekas](https://jurnal.polsri.ac.id/index.php/jupiter/article/view/5435) menunjukan bahwa penggunaan modelling K-Nearest Neighbors menghasilkan performa paling bagus dengan adanya set hyper parameter tunning neighbors. Pada penelitian [Penerapan Model Machine Learning Algoritma Gradient Boosting dan LinearRegression Melakukan Prediksi Harga Kendaraan Bekas](https://jurnal.unity-academy.sch.id/index.php/jirsi/article/view/56/44) menunjukan bahwa Algoritma boosting dengan kombinasi parameter optimal terbukti mampu meningkatkan akurasi prediksi dibandingkan model dasar.
 
 Kesimpulan yang didapat bahwa penggunaan ketiga algoritma diatas sebagai solusi dalam membangun model prediksi. Model tersebut diharapkan dapat membantu produsen dalam menentukan harga yang kompetitif di pasar dan dealer mobil dalam merumuskan strategi penetapan harga yang optimal. Untuk proses pengembangan model kasus tersebut, dataset yang digunakan berisi fitur-fitur terkait komponen-komponen dalam mobil. Dataset tersebut disusun dengan teknik scraped dari Twitter dan Edmunds oleh penyedia sumber asal dataset yang terdapat di platform [Kaggle](https://www.kaggle.com/datasets/CooperUnion/cardataset)
@@ -14,19 +16,16 @@ Kesimpulan yang didapat bahwa penggunaan ketiga algoritma diatas sebagai solusi 
 ### 1. Problem Statements
 Berdasarkan latar belakang yang telah diuraikan sebelumnya, perusahaan akan mengembangkan sebuah sistem predictive modelling untuk menjawab dua permasalahan berikut:
 * Apa fitur-fitur yang paling berpengaruh terhadap harga jual mobil?
-* Berapa estimasi harga jual mobil berdasarkan fitur-fitur yang paling berpengaruh dengan MRSP?
+* Berapa estimasi harga jual mobil berdasarkan fitur-fitur yang paling berpengaruh?
 ### 2. Goals
 Berdasarkan problem statments yang sudah teruraikan diatas bahwa tujuan atau goalsnya sebagai berikut:
 * Mengetahui fitur-fitur yang memiliki pengaruh erat terhadap harga jual.
-* Membuat model machine learning yang dapat memprediksi estimasi harga jual mobil secara akurat berdasarkan fitur-fitur yang berpengaruh erat.
-* Menghitung rata-rata selisih antara nilai prediksi dengan nilai y_true untuk setiap algoritma.
-* Melihat akurasi model yang paling tinggi dari setiap algoritma.
+* Membuat model machine learning yang dapat memprediksi estimasi harga jual mobil secara akurat berdasarkan fitur-fitur yang berpengaruh erat disertai bukti kuat.
 ### 3. Solution Statemnet
 Untuk kedua problem statemnets diatas, solusi yang akan digunakan sebagai berikut:
 * Membangun model prediksi untuk memperkirakan estimasi harga jual mobil berdasarkan harga_jual menggunakan algoritma machine learning, yakni **K-Nearest Neighbor(KNN)**. Model yang dibangun dengan Algoritma tersebut menggunakan teknik Grid Search untuk mencapai performa yang diinginkan
 * Menggunakan algoritma machine learning **Random Forest (Bagging Algorithm)** dengan menyesuaikan beberapa parameter melalui optimasi teknik Grid Search hingga mencapai performa yang optimal.
-* Menggunakan algoritma machine learning **Boosting Algorithm** dan menambahkan hyperparameter tuning dengan teknik Grid Search untuk mencapai performa model terbaik.
-* Metrik yang digunakan dalam proses evaluasi model adalah [Mean Squared Eror](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html) atau MSE karena dinilai cocok untuk kasus regresi.
+*  Menggunakan algoritma machine learning **AdaBoost (Bossting algotithm)** dengan menyesuaikan beberapa parameter melalui optimasi teknik hyperparameter tunning(Grid Search) hingga mencapai performa yang optimal.
 ### 4. Metodologi
 Prediksi harga adalah tujuan yang ingin dicapai dan harga merupakan variabel kontinu. Dalam predictive analytics, untuk data yang bersifat variabel kontinu artinya merupakan permasalahan regresi. Oleh karena itu, metodologi pada proyek ini adalah: membangun model regresi dengan harga jual mobil sebagai variabel target(dependent variable) dan fitur-fitur utama mobil sebagai variabel prediktor(independent variabel).
 
@@ -53,8 +52,9 @@ Variabel - variabel yang ada dalam dataset [Car Features and MSRP](https://www.k
 
 Informasi di atas diperoleh menggunakan bantuan library pandas melalui metode info(), unique(), dan nunique().
 ### Data Gathering dan Data Loading
+Dataset yang awalnya tersimpan diluar environment colab(repository github) diimport lalu dibaca dengan teknik read_csv melalui Pandas Library. DataFrame inilah yang nanti digunakan dalam prose modeling. Berikut adalah tabel datafrmae yang mengandung informasi awal dataset.
+
 Tabel 1. Dataset yang dibentuk menjadi DataFrame di Environment Colab
-Dataset yang awalnya tersimpan diluar environment colab(repository github) diimport lalu dibaca dengan teknik read_csv melalui Pandas Library. DataFrame inilah yang nanti digunakan dalam prose modeling.
 |index|Make|Model|Year|Engine Fuel Type|Engine HP|Engine Cylinders|Transmission Type|Driven\_Wheels|Number of Doors|Market Category|Vehicle Size|Vehicle Style|highway MPG|city mpg|Popularity|MSRP|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
 |0|BMW|1 Series M|2011|premium unleaded \(required\)|335\.0|6\.0|MANUAL|rear wheel drive|2\.0|Factory Tuner,Luxury,High-Performance|Compact|Coupe|26|19|3916|46135|
@@ -74,10 +74,11 @@ Data Assesing  adalah proses evaluasi dan analisis awal terhadap data untuk mema
 * Checking the missing or null values
 Proses ini melibatkan pengecekan apakah ada nilai yang hilang atau null dalam dataset. Nilai yang hilang dapat mengganggu analisis data karena dapat menyebabkan bias atau kesalahan dalam hasil analisis. Oleh karena itu, penting untuk mengidentifikasi di mana nilai-nilai tersebut hilang dan memutuskan bagaimana cara menangani mereka.
 Dengan menggunakan bantuan metode isna() yang dijumlahkan, hasil terlihat bahwa terdapat missing value pada kolom Engine Fuel Type sebayak 3 sel, Engine HP sebanyak 69 sel, Engine Cylinders 30 sebanyak 30 sel, Number of Doors sebanyak 6 sel, dan Market Category sebanyak 3742 sel.
-Berikut visualisasi dengan bantuan library seaborn pada Gambar 1.
-![Gambar 1](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/image.png).
+![image](https://github.com/Symphoen1x/Dicoding_Expert/assets/116389179/4e472f18-d85b-4f65-90d3-b09c0a20b71c)
 
-  Berdasarkan Gambar 1, terlihat jelas pada bintik-bintik yang linear dengan nama-kolom mengandung missing value. 
+  Gambar 1. Visualisasi missing value dengan bantuan library seaborn.
+
+Berdasarkan Gambar 1, terlihat jelas pada bintik-bintik yang linear dengan nama-kolom mengandung missing value. 
 * Checking the duplicate rows
 Tahap ini bertujuan untuk melihat apakah ada baris data yang identik atau duplikat dalam dataset? Duplikasi data bisa menjadi masalah karena mereka dapat mempengaruhi hasil analisis statistik dengan memberikan bobot tambahan pada observasi yang sama. Mengidentifikasi dan menghapus duplikasi dapat membantu
 memastikan keakuratan analisis data dan mencegah distorsi dalam hasil.
@@ -88,10 +89,11 @@ Kemudian, visualisasi jumlah data dari setiap kolom digunakan untuk melihat perb
 * Detecting Outliers
 Outliers adalah nilai yang menonjol secara statistik berbeda dari mayoritas nilai dalam dataset. Mereka dapat menyebabkan bias dalam analisis statistik atau model yang dibangun dari data tersebut. Outliers juga dapat mengakibatkan testing model menghasilkan overfitting atau underfitting. Maka dari itu, proses ini sangat dibutuhkan.
 Dengan menggunakan library seaborn dengan methodnya boxplot(), parameter di dalamnya dapat disi dengan kolom numerik dari dataset yang digunakan.
-Gambar 2. Salah satu contoh visualisasi keberadaan outlier dari kolom Engine HP.
-![Gambar 2](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/outliers.png)
+![outliers](https://github.com/Symphoen1x/Dicoding_Expert/assets/116389179/21be6b90-6258-417d-b9e5-d4dbef2654ef)
 
-   Berdasarskan visualisasi pada gambar 2, terlihat bahwa terdapat beberapa fitur numerik yang mengandung outlier. Nantinya, Outlier-outlier tersebut akan dihapus menggunakan teknik atau metode IQR. 
+  Gambar 2. Salah satu contoh visualisasi keberadaan outlier dari kolom Engine HP.
+   
+Berdasarskan visualisasi pada gambar 2, terlihat bahwa terdapat beberapa fitur numerik yang mengandung outlier. Nantinya, Outlier-outlier tersebut akan dihapus menggunakan teknik atau metode IQR. 
 
 ### Data Cleaning
 Data Cleaning adalah proses pembersihan data yang bertujuan untuk memastikan kualitas dan konsistensi data sebelum dilakukan analisis lebih lanjut. Tujuan utamanya adalah untuk menghilangkan masalah atau gangguan dalam dataset yang dapat memengaruhi hasil analisis statistik atau pembangunan model. Pada tahap ini akan dilakukan beberapa proses seperti Renaming the columns, Dropping the missing or null values, Dropping the duplicated rows, dan Handling the outliers. Berikut implemetasi dan hasil yang didapat:
@@ -99,19 +101,22 @@ Data Cleaning adalah proses pembersihan data yang bertujuan untuk memastikan kua
 Kenapa proses ini diperlukan? karena pada awalnya, penolahan dataset tidak selamanya melakukan renaming kolom-kolom dengan bahasa yang pasti sesuai dengan kebutuhan bisnis. Maksudnya, penamaan kolom-kolom tersebut bisa jadi mengikuti aturan tertentu sehingga terkesan umum. Meskipun bersifat opsional, proses tersebut dibutuhkan dalam project ini utnuk mengubah kolom MRSP menjadi Harga Jual.
 * Dropping the missing or null values
 Berasarkan tahap sebelumnya, teradapat beberapa missing value yang dapat mengganggu proses analisis dan pembuatan prediktif model. Maka perlu adanya tindakan lebih lanjut untuk menangani keberadaanya, yaitu menghapus missing value. Teknik yang akan digunakan adalah metode dropna() dari library pandas. Hasilnya kolom-kolom yang bermasalah seperti Engine Fuel Type sebayak 3 sel, Engine HP sebanyak 69 sel, Engine Cylinders 30 sebanyak 30 sel, Number of Doors sebanyak 6 sel, dan Market Category sebanyak 3742 sel berhasil dibersihkan.
-Gambar 3. Gambar untuk menunjukan perbedaan dari tahap sebelumnya pada data assesing.
-![Gambar 3](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/clean.png)
+![clean](https://github.com/Symphoen1x/Dicoding_Expert/assets/116389179/79fce6e3-dec5-4614-bd20-27713ffe70e6)
 
-  Berdasarkan tersebut, perbedaan yang dapat dibandingkan dengan Gambar 2 sebelumnya bahwa Gambar 3 terlihat bersih.
+  Gambar 3. Gambar untuk menunjukan hasil dari proses cleaning data.
+
+Berdasarkan Gambar 3, perbedaan yang dapat dibandingkan dengan gambar sebelumnya bahwa Gambar 3 terlihat bersih.
 * Dropping the duplicated rows
 Terlihat di tahap sebelumnya bahwa terdapat data yang terduplikasi. Kali ini, proses lanjutan akan dilakukan untuk mengurangi gangguan yang ada pada data karena jumlahnya yang besar. Dengan menggunakan metode drop_duplicates() dari library pandas ke dataset ini proses menghapus duplikasi data dalam baris berhasil dilakukan. Bukti menunjukan bahwa jumlah data dalam baris berkurang dari yang awalnya 11914 menjadi 7735.
 *  Handling the outliers
 Berdasarkan visualisasi keberadaan outlier di tahap sebelumnya, proses ini penting untuk dilakukan agar akurasi model yang dilatih tidak terpengaruh secara signifikan. Teknik yang akan digunakan seperti yang sudah disinggung sebelumnya, yaitu IQR. Teknik ini mengidentifikasi outlier yang ada dibatas atas Q3 dan dibatas bawah atau Q1. Lalu, nilai-nilai yang ada di dalam batas akan digunakan sementara yang diluar kedua batas atau outlier akan dihapus. Formula yang lebih jelas untuk IQR sebagai berikut:
 $Batas\ bawah = Q1 - 1.5 * IQR$ dan $Batas\ atas = Q3 + 1.5 * IQR$.
-Hasil dapat terlihat dari pengurangan jumlah data dalam baris yang sebelumnya berjumlah 7735 menjadi 5622 dalam bentuk tabel sederhana dengan bantuan metode info().
-Gambar 4. Hasil final setelah proses cleaning data.
+![final cleaning](https://github.com/Symphoen1x/Dicoding_Expert/assets/116389179/b6a4ff93-704e-40b0-bc8c-1c5d4dc2991b)
 
-![Gambar 4](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/Screenshot%20(247).png).
+  
+    Gambar 4. Hasil final setelah proses cleaning data.
+
+Berdasarkan Gambar 4, hasil dapat terlihat dari pengurangan jumlah data dalam baris yang sebelumnya berjumlah 7735 menjadi 5622 dalam bentuk tabel sederhana dengan bantuan metode info().
 ### Exploratory Data Analysis -Univariate Analysis
 Kenapa Univariate Analysis? jadi tujuan melakukan analysis ini untuk memahami karakteristik dari satu variabel tunggal dalam dataset tanpa ada memperhatikan hubungan variabel lain. Tahap kali ini, Univariate analysis dilakukan dengan memisah categorical feature dengan numerical features.
 * Categorical Features (Fitur Kategorik)
@@ -119,40 +124,50 @@ Proses awal pemisahan kedua fitur menggunakan bantuan metode select_dtypes denga
 ![Gambar 5](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/newplot.png)
 
   Gambar 5. Visualisasi univariate pada kolom Make atau Merek.
-  Berdasarkan gambar tersebut, TOp 5 merek mobil yang paling banyak jumlahnya, yaitu Chevrolet, Volkswagen, Cadillac, Infiniti, dan Nissan.
+  
+  Berdasarkan Gambar 5, TOp 5 merek mobil yang paling banyak jumlahnya, yaitu Chevrolet, Volkswagen, Cadillac, Infiniti, dan Nissan.
                 
 * Numerical Features (Fitur Numerik)
 Pada Numerical Features, proses pemisahan menggunakan metode select_dtypes dengan parameter exclude untuk melakukan pemilihan tipe data. Cara memvvisualisasikan fitur ini secara univariate dapat dilakukan dengan metode histogram dari library plotly. Berikut ini adalah visualisasi univariate dari kolom-kolom numerik.
-![Gambar 6](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/multivariate.png)
+![multivariate](https://github.com/Symphoen1x/Dicoding_Expert/assets/116389179/e7840933-1b51-422c-82e1-592a658e7d14)
+
 
   Gambar 6. Visualisasi univariate analisis pada kolom numerik.
-  Berdasarkan gambar tersebut, histogram pada variabel "Harga_Jual", "highwat MPG", "Engine HP" dan "city mpg" memiliki beberapa karakteristik seperti:
+  
+  Berdasarkan Gambar 6, histogram pada variabel "Harga_Jual", "highwat MPG", "Engine HP" dan "city mpg" memiliki beberapa karakteristik seperti:
 * Peningkatan harga jual mobil terdistribusi dengan cukup baik. Hal ini dapat dilihat pada histogram dari keempat kolom tersebut yang mana sampel cenderung meningkat lalu mengalami penurunan seiring dengan meningkatnya harga jual rumah.
 * Distribusi harga cenderung cukup normal. Hal ini kemungkinan besar akan berimplikasi pada model.
 ### Exploratory Data Analysis -Multivariate Analysis
 Multivariate Analysis adalah analisis yang memperlihatkan korelasi atau hubungan dua atau lebih variabel. Analysis ini bertujuan untuk memahami hubungan antara dua atau lebih variabel dalam sebuah dataset. Seperti analysis sebelumnya, kali ini juga melakukan pemisahan antara numerical feature dan categorical feature. Nantinya, masing masing feature tersebut akan dianalisis terhadap variabel target, yaitu Harga_Jual.
 * Categorical Features
 Cara memvvisualisasikan fitur ini secara multivariate dapat dilakukan dengan bantuan metode histogram dari library plotly. Bedanya dengan analisis univariate adalah kali ini kita memasukan dua parameter yang diperlukan, yaitu x yang berisi beberapa variabel independent dan y yang berisi variabel dependent atau target (Harga_Jual). Berikut ini adalah salah satu gambar yang dapat dijadikan sampel output.
-![Gambar 7](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/newplot%20(2).png).
+![newplot (2)](https://github.com/Symphoen1x/Dicoding_Expert/assets/116389179/926528e0-3468-4692-8b1a-a638ce5c573e)
 
   Gambar 7. Visualisasi multivariate Analisis pada kolom Veichle Size.
-  Berdasarkan gambar tersebut dari fitur veichle Size terlihat bahwa pengaruh terhadap terhadap variabel target atau Harga_Jual bervariasi. Misalkan, pada bagian "Midsize" terlihat memiliki korelasi tertinggi dengan variabel target (Harga_Jual), sementara yang lain relatif sama.
+  
+  Berdasarkan Gambar 7, fitur veichle Size terlihat bahwa pengaruh terhadap terhadap variabel target atau Harga_Jual bervariasi. Misalkan, pada bagian "Midsize" terlihat memiliki korelasi tertinggi dengan variabel target (Harga_Jual), sementara yang lain relatif sama.
 * Numerical Features
 Untuk mengamati hubungan antara fitur numerik, kita akan menggunakan fungsi pairplot(). Kita juga akan mengobservasi korelasi antara fitur numerik dengan fitur target menggunakan fungsi corr(). Berikut adalah gambar dari kedua cara tersebut.
-Gambar 8. Visualisasi multivariate pada numerical features dengan fungsi pairplot().
-![Gambar 8](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/real%20multivariate.png).
+![real multivariate](https://github.com/Symphoen1x/Dicoding_Expert/assets/116389179/2bbc1a65-66b8-4f1f-9f7a-0876f82a8729)
 
-  Gambar 9. Visualisasi multivariate pada numerical features dengan fungsi corr().
-![Gambar 9](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/cmaps.png).
+  Gambar 8. Visualisasi multivariate pada numerical features dengan fungsi pairplot.
 
-  Kesimpulan yang bisa diambil berdasarkan kedua teknik tersebut pada numerical feature sebagai berikut:
+  Berdasarkan gambar 8, fungsi pairplot memberikan gambaran kumpulan fitur/multivariate fitur yang saling berkorelasi dan memperlihatkan distribusi data numerik. Fitur 
+![cmaps](https://github.com/Symphoen1x/Dicoding_Expert/assets/116389179/2eb08778-9741-4a54-a677-5696a33e70df)
+
+  Gambar 9. Visualisasi multivariate pada numerical features dengan fungsi corr.
+
+  Berdasarkan Gambar 9, fungsi corr memberikan sebuah Heatmaps dari beberapa fitur numerik yang saling berkorelasi dengan indikasi sebuah nilai antara -1 hingga 1. Kesimpulan yang bisa diambil berdasarkan kedua teknik tersebut pada numerical feature sebagai berikut:
 * Kolom yang memiliki korelasi tertinggi dengan variabel target(Harga_Jual) adalah Engine Hp dengan skor korelasi diatas 70%.
 * Dapat disimpulkan bahwa kolom-kolom yang berkorelasi sedang dengan variabel target Harga_Jual adalah higway MPG, city mpg, dan Engine Cylinders.
 * Dapat disimpulkan bahwa kolom-kolom yang berkorelasi rendah dengan variabel target Harga_Jual adalah Popularity, Year, dan Number of Doors. Lalu, kolom-kolom yang memiliki korelasi rendah ini nantinya akan dihapus karena dapat mempengaruhi kinerja model dalam memprediksi variabel target Harga_Jual. Dengan menghapus kolom-kolom yang memiliki korelasi rendah,  teknik dapat mengurangi dimensi fitur dan meningkatkan performa model dapat dilakukan dalam proses pembelajaran dan prediksi.
 ## Data Preparation
 Data preparation merupakan tahapan penting dalam proses pengembangan model machine learning. Ini adalah tahap di mana  proses transformasi pada data akan dilakukan dengan menjadikan data ke bentuk yang cocok untuk proses pemodelan. Terdapat beberapa tahapan di dalamnya Encoding fitur kategori, Reduksi dimensi dengan PCA, proporsi dataset dengan fungsi train_test_split, dan Standarisasi.
 ### Encoding Feature Category 
-Ini adalah proses mengubah fitur kategorikal atau kualitatif menjadi representasi numerik yang dapat dimengerti oleh algoritma machine learning. Fitur kategorikal adalah fitur yang memiliki nilai dalam kategori atau kelompok tertentu tanpa urutan yang terdefinisi. Proses ini menggunakan teknik one-hot-encoding dengan tujuan untuk mendapatkan fitur baru yang sesuai. Fitur baru ini nantinya dapat digunakan untuk mewakili fitur kategori. Untuk teknik one-hot encoding ini, metode yang dibutuhkan adalah concat dan get_dummies dari library Scikit-learn. Berikut adalah tabel sebagai hasil/output dari proses diatas:
+Ini adalah proses mengubah fitur kategorikal atau kualitatif menjadi representasi numerik yang dapat dimengerti oleh algoritma machine learning. Fitur kategorikal adalah fitur yang memiliki nilai dalam kategori atau kelompok tertentu tanpa urutan yang terdefinisi. Proses ini menggunakan teknik one-hot-encoding dengan tujuan untuk mendapatkan fitur baru yang sesuai. Fitur baru ini nantinya dapat digunakan untuk mewakili fitur kategori. 
+
+Untuk teknik one-hot encoding ini, metode yang dibutuhkan adalah concat dan get_dummies dari library pandas. Berdasarkan Tabel 2, hasil yang akan dilihat sebagai tahap data preparation bagian Encoding fitur kategori sebagai berikut:
+
 Tabel 2. Hasil dari proses Encoding Feature Category.
 |index|Engine HP|Engine Cylinders|highway MPG|city mpg|Harga\_Jual|Make\_Acura|Make\_Alfa Romeo|Make\_Audi|Make\_BMW|Make\_Buick|Make\_Cadillac|Make\_Chevrolet|Make\_Chrysler|Make\_Dodge|Make\_FIAT|Make\_GMC|Make\_Genesis|Make\_HUMMER|Make\_Honda|Make\_Hyundai|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
@@ -168,9 +183,16 @@ PCA bekerja menggunakan metode aljabar linier. Teknik ini mengasumsikan bahwa se
 
 Untuk mengetahui fitur-fitur yang memiliki korelasi tinggi maka dapat didasarkan atas visualisasi dengan fungsi pairplot(). Gambar 8 yang telah ditunjukan sebelumnya akan dijadikan acuan analisis dalam visualisasi ini untuk menentukan fitur mana yang cocok digunakan. Pada gambar tersebut fitur "highway MPG" terhadap fitur "city mpg" memiliki korelasi yang cukup baik dan mengandung informasi yang sama, yaitu luas distribusi berdasarkan fungsi pairplot().
 
-![Gambar 10](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/pairplot%20keren.png).
+![pairplot keren](https://github.com/Symphoen1x/Dicoding_Expert/assets/116389179/70a7288a-1e7b-4832-9cef-a578d046a558)
 
+  Gambar 10. Korelasi antara fitur yang memiliki pengaruh kuat dan mengandung informasi distribusi yang sama.
+
+  Berdasarkan Gambar 10, Fitur yang mencukupi syarat-syarat tersebut adalah fitur highway MPG dan city mpg. Kedua fitur ini nantinya akan disatukan untuk diambil nilai dimensi keduanya.
+  
   Selanjutnya akan dilakukan proses memanggil class PCA() dari library scikit-learn. Paremeter yang akan  dimasukkan ke dalam class adalah n_components dan random_state. Parameter n_components merupakan jumlah komponen atau dimensi, berdasarkan Gambar 10  maka jumlah yang dimasukan ada 2. Kemudian akan muncul hasil berupa array yang merupaakn Principal Component (PC). PC pertama maksudnya informasi mengenai dua fitur diatas sebagian besar terdapat di PC tersebut, sementara sisanya terdapat di PC dua. Pc pertama ini mewakili dua fitur melalui sebuah variabel baru yang bernama "dimension". Berikut dataframe hasil proses PCA.
+
+Setelah proses reduksi dengan PCA selesai, Tabel 3 akan menunjukan bagaimana vivualisasi datafrane untuk hasil akhir dari proses pengurangan dimensi PCA.
+  
 Tabel 3. Dataframe hasil akhri dari proses PCA
 |index|Engine HP|Engine Cylinders|Harga\_Jual|Make\_Acura|Make\_Alfa Romeo|Make\_Audi|Make\_BMW|Make\_Buick|Make\_Cadillac|Make\_Chevrolet|Make\_Chrysler|Make\_Dodge|Make\_FIAT|Make\_GMC|Make\_Genesis|Make\_HUMMER|Make\_Honda|Make\_Hyundai|Make\_Infiniti|Make\_Kia|dimension|
 |---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|--|
@@ -182,7 +204,8 @@ Pada awalnya, proses scaling pada seluruh dataset membuat model memiliki informa
 ### Standarisasi
 Standardisasi adalah teknik transformasi yang paling umum digunakan dalam tahap persiapan pemodelan. Teknik ini digunakan untuk transformasi pada feature numerik. StandardScaler melakukan proses standarisasi fitur dengan mengurangkan mean (nilai rata-rata) kemudian membaginya dengan standar deviasi untuk menggeser distribusi. StandardScaler menghasilkan distribusi dengan standar deviasi sama dengan 1 dan mean sama dengan 0. Sekitar 68% dari nilai akan berada di antara -1 dan 1.
 
-Untuk menghindari kebocoran informasi pada data uji, penerapan dilakukan untuk fitur standarisasi pada data latih. Kemudian, pada tahap evaluasi, standarisasi dilakukan pada data uji. 
+Untuk menghindari kebocoran informasi pada data uji, Tabel 4 menerapkan hasil teknik diatas dilakukan melalui pada data latih. Kemudian, pada tahap evaluasi, standarisasi dilakukan pada data uji.
+
 Tabel 4. Dataframe hasil akhir setelah proses standarisasi pada fitur numerik.
 |index|Engine HP|Engine Cylinders|dimension|
 |---|---|---|---|
@@ -271,20 +294,25 @@ Selanjutnya, beberapa proses dalam tahap evaluasi yang akan dilakukan adalah sca
 ### Scaling numeric features
 Sebelum menghitung nilai MSE, proses scaling akan dilakukan untuk fitur numerik pada data uji. Karena sebelumnya, pada proses scaling hanya pada data latih saja. Setelah model dilatih menggunakan 3 algoritma yaitu KNN, Random Forest dan AdaBoost, proses scaling fitur akan dilakukan pada data uji. Hal ini harus dilakukan agar skala antara data latih dan data uji sama sehingga evaluasi dapat berjalan.
 ### Count MSE for data train and test
-Proses perhitungan nilai MSE dimulai dengan pembuatan DataFrame yang memiliki kolom 'train' dan 'test' serta indeks 'KNN', 'RF', dan 'Boosting'. DataFrame ini akan digunakan untuk menyimpan nilai MSE untuk setiap algoritma pada data latih (train) dan data uji (test). Selanjutnya, dalam iterasi, setiap indeks yang mewakili algoritma akan digunakan untuk menghitung nilai MSE menggunakan data latih dan data uji sebagai input. Berikut Tabel 5 hasil dataframe setelah dilakukan perhitungan nilai mse untuk setiap algoritma pada data latih dan data uji. 
+Proses perhitungan nilai MSE dimulai dengan pembuatan DataFrame yang memiliki kolom 'train' dan 'test' serta indeks 'KNN', 'RF', dan 'Boosting'. DataFrame ini akan digunakan untuk menyimpan nilai MSE untuk setiap algoritma pada data latih (train) dan data uji (test). Selanjutnya, dalam iterasi, setiap indeks yang mewakili algoritma akan digunakan untuk menghitung nilai MSE menggunakan data latih dan data uji sebagai input.  
+
+Tabel 5. Hasil dataframe setelah dilakukan perhitungan nilai mse untuk setiap algoritma pada data latih dan data uji. 
+
+Tabel 5 menunjukan perbadingan ketiga algoritma dalam menghitung mse pada data latih dan data uji. Inilah yang dijadikan bahan untuk proses mengetahui model yang mendekati y_aktual terbaik.
 |Nama Algoritma|train|test| 
 |---|---|---|
 |KNN|16232.637486|18914.353625|18914.353625|
 |RandomForest|5732.779149|13660.525417|
 |Boosting|69324.69636|70718.092728|
 
-Tahapan plot visualisasi sederhana untuk memudahkan dalam pembacaan hasil diatas.
-![Gambar 11](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/last.png).
+![last](https://github.com/Symphoen1x/Dicoding_Expert/assets/116389179/4e3df3d5-7597-4249-85b0-52cb20750214)
 
-Dari gambar di atas, terlihat bahwa, model Random Forest (RF) memberikan nilai eror yang paling kecil dibandingkan algoritma lain seperti KNN dan Boosting Algorithm. Sedangkan model dengan algoritma Boosting memiliki eror yang paling besar (berdasarkan grafik, angkanya di atas 60000). Maka dari itu,  model Random Forest yang akan dipilih sebagai model terbaik untuk memprediksi harga jual mobil.
+Gambar 11. Tahapan plot visualisasi sederhana untuk memudahkan dalam pembacaan hasil diatas.
+
+Dari Gambar 11, terlihat bahwa, model Random Forest (RF) memberikan nilai eror yang paling kecil dibandingkan algoritma lain seperti KNN dan Boosting Algorithm. Sedangkan model dengan algoritma Boosting memiliki eror yang paling besar (berdasarkan grafik, angkanya di atas 60000). Maka dari itu,  model Random Forest yang akan dipilih sebagai model terbaik untuk memprediksi harga jual mobil.
 ### Prediction target variable
-Tabel 7. Hasil prediksi nilai target berdasarkan ketiga model algoritma(KNN, RandomForest,dan Boosting) menggunakan beberapa harga dari data test.
-
+Prediksi pada Tabel 6 adalah pembuktian untuk menjawab problem statement diatas, yaitu Berapa estimasi harga jual mobil berdasarkan fitur-fitur yang paling berpengaruh dengan Harga_Jual?
+Tabel 6. Hasil prediksi nilai target berdasarkan ketiga model algoritma(KNN, RandomForest,dan Boosting) menggunakan beberapa harga dari data test.
 |index|y\_true|prediksi\_KNN|prediksi\_RandomForest|prediksi\_Boosting|
 |---|---|---|---|---|
 |2992|68855|68385\.0|69552\.0|60912\.8|
