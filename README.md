@@ -193,21 +193,13 @@ Tabel 4. Dataframe hasil akhir setelah proses standarisasi pada fitur numerik.
 |1020|-1\.1359335942242075|-1\.0305270252135548|1\.4180144445216696|
 
   Berdasarkan output diatas, terlihat benar bukan bahwa standarisasi mengubah nilai mean menjadi 0 dan nilai standar devisiasi menjadi 1. Sekitar 68% dari nilai akan berada di antara -1 dan 1.
-
-
- TO-do:
-* Menjelaskan kelebihan dan kekurangan dari setiap algoritma yang digunakan.
-
-* Jika menggunakan satu algoritma pada solution statement, lakukan proses improvement terhadap model dengan hyperparameter tuning. Jelaskan proses improvement yang dilakukan.
-
-* Jika menggunakan dua atau lebih algoritma pada solution statement, maka pilih model terbaik sebagai solusi. Jelaskan mengapa memilih model tersebut sebagai model terbaik.
-
   
 ## Model Devlopment
 Proses kali ini menunjukan penggunaan machine learning dengan beberapa Algoritma yang akan digunakan. Algoritma yang akan digunakan pada proses Model Devploment kali ini ada tiga, yaitu K-Nearest Neighbor, Random Forest, dan Boosting Algorithm. Sebelum itu, pembuatan DataFrame yang berisi ketiga algoritma diatas untuk membandingkan hasil prediksi terbaik perlu dibuat. Tidak lupa untuk menggunakan hyperparameter tuning [GridSearch](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html) dalam proses pelatihan model dengan kaetiga algoritma tersebut. Tujuanya untuk mengingkatkan performa model yang dilatih. Parameter ini nantinya dibutuhkan dalam mencari parameter terbaik dari masing masing algoritma yang dilakukan pelatihan.
 ### Model Devlopment Menggunakan Algoritma K-Nearest Neighbor atau KNN
 [KNN](https://www.ibm.com/topics/knn#:~:text=Next%20steps-,K-Nearest%20Neighbors%20Algorithm,of%20an%20individual%20data%20point) adalah algoritma yang relatif sederhana dibandingkan dengan algoritma lain. Algoritma KNN menggunakan ‘kesamaan fitur’ untuk memprediksi nilai dari setiap data yang baru. Dengan kata lain, setiap data baru diberi nilai berdasarkan seberapa mirip titik tersebut dalam set pelatihan. KNN ini cocok digunakan untuk kasus regresi dan klasifikasi dalam machine learning.
-Algoritma K-Nearest Neighbor (KNN) bekerja dengan cara mencari K tetangga terdekat data input baru berdasarkan jaraknya, lalu memprediksi output berdasarkan rata-rata output tetangga tersebut. 
+Algoritma K-Nearest Neighbor (KNN) bekerja dengan cara mencari K tetangga terdekat data input baru berdasarkan jaraknya, lalu memprediksi output berdasarkan rata-rata output tetangga tersebut.
+
 Kelebihan KNN:
 
 * Sederhana untuk diimplementasikan dan dimengerti.
@@ -221,21 +213,63 @@ Kekurangan KNN:
 * Prediksi dapat menjadi lambat karena perhitungan jarak untuk data latih yang besar.
 * Hasil sangat tergantung pada pemilihan nilai K dan fungsi jarak yang digunakan.
   
-Kali ini, modelling dengan Algoritma KNN akan menggunakan bantuan hyperparameter tuning untuk menemukan kombinasi nilai optimal untuk hyperparameter dari sebuah model machine learning dengan tujuan meningkatkan performa model. Proses awal penggunaan algortima ini dengan memanggil metode [KNeighborsRegressor()](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html) dari library scikit-learn. Kemudian parameter yang digunakan di algoritma ini, yaitu n_neigbors akan di sesuaikan berdasarkan hyperparameter tunning. Output yang muncul dari proses tersebut adalah skor RandomSearch untuk KNN sebesar -23871881.20319546 dan parameter n_neigbors = 10. Kemudian, Masuk ke proses pelatihan model KNN dengan parameter n_neigbors menggunakan hasil dari tahapan sebelumnya.    ditrain oleh fungsi fit() dengan matrix evaluasi yang digunakan adalah Mean Squared Error atau MSE. Hasil yang terlihat 
-
+Kali ini, modelling dengan Algoritma KNN akan menggunakan bantuan hyperparameter tuning [GridSearch](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html) untuk menemukan kombinasi nilai yang optimal terhadap parameter model tersebut agar nantinya dapa meningkatkan performa model. Proses awal penggunaan algortima ini dilakukan pemanggilan metode [KNeighborsRegressor()](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html) dari library scikit-learn. Kemudian parameter yang digunakan di algoritma ini, yaitu n_neigbors akan di sesuaikan berdasarkan hyperparameter tunning. Output yang muncul dari proses tersebut adalah skor RandomSearch untuk KNN sebesar -23871881.20319546 dan parameter n_neigbors = 10. Kemudian, masuk ke proses pelatihan model KNN dengan parameter n_neigbors menggunakan hasil dari tahapan sebelumnya. Model ditrain oleh fungsi fit() dengan matrix evaluasi yang digunakan adalah Mean Squared Error atau MSE. 
 ### Model Devlopment Menggunakan Algoritma Random Forest
-Random forest merupakan salah satu model machine learning yang termasuk ke dalam kategori ensemble (group) learning. Apa itu model ensemble? Sederhananya, ia merupakan model prediksi yang terdiri dari beberapa model dan bekerja secara bersama-sama.
+Random forest merupakan salah satu model machine learning yang termasuk ke dalam kategori ensemble (group) learning. Apa itu model ensemble? Sederhananya, ia merupakan model prediksi yang terdiri dari beberapa model dan bekerja secara bersama-sama. Random Forest bekerja dengan membangun sejumlah pohon keputusan (decision trees) dari data latih dengan melakukan sampling acak baik pada data maupun fiturnya. Setiap pohon akan tumbuh secara maksimal tanpa pruning. Kemudian, hasil prediksi dari masing-masing pohon ini akan digabungkan dengan rata-rata (average) atau voting untuk mendapatkan estimasi model akhir.
 
-Kali ini, modelling dengan Algoritma Random Forest akan menggunakan bantuan hyperparameter tuning untuk menemukan kombinasi nilai optimal untuk hyperparameter dari sebuah model machine learning dengan tujuan meningkatkan performa model.
+Kelebihan Random Forest:
+
+* Akurasi prediksi tinggi untuk banyak kasus.
+* Dapat menangani data dengan banyak fitur, bahkan jika sebagian besar fitur tidak relevan.
+* Mampu melakukan feature selection secara otomatis.
+* Dapat mengestimasi variabel penting.
+* Paralelisasi mudah diimplementasikan.
+  
+Kekurangan Random Forest:
+
+* Kehilangan interpretabilitas model dibandingkan single decision tree.
+* Waktu komputasi dan memori yang dibutuhkan besar untuk data latih yang sangat besar.
+* Sensitif terhadap noise dan outlier jika tidak ditangani dengan baik.
+* Hasilnya mungkin overfit jika ada pohon yang sangat kuat pengaruhnya.
+
+Kembali lagi dalam penyesuaian hyperparameter, model Random Forest akan menggunakan teknik hyperparameter tunning dari [GridSearch](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html). Tahap awal seperti biasa akan dilakukan pemanggilan metode [RandomForestRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html) dari library Scikit-learn.  Kemudian parameter yang digunakan di algoritma ini, yaitu n_estimators=80, max_depth=64, random_state=55, n_jobs=-1. NIlai dari masing-masing parameter diinput berdasarkan hasil hyperparameter tunning sebelumnya. Sebelumnya, apa maksud dari parameter-parameter tersebut:  
+* n_estimators untuk menentukan jumlah pohon keputusan yang akan dibangun dalam model ensemble. Semakin besar nilai n_estimators, semakin kompleks model ensemble tersebut.
+* n_jobs untuk  menentukan jumlah pekerjaan paralel yang akan dijalankan saat melatih model. Ketika diatur ke nilai -1, itu berarti menggunakan semua core CPU yang tersedia.
+* max_depth untuk mengontrol kedalaman maksimum dari setiap pohon keputusan dalam ensemble. Semakin besar nilai max_depth, semakin kompleks modelnya.
+  
+Sebagai tambahan, terdapat parameter random_state yang merupakan penambahan manual untuk menentukan seed untuk generator angka acak yang digunakan saat membagi data menjadi subset saat membangun pohon sehingga menghasilkan hasil yang sama setiap kali kode dijalankan.
+Tahapan terakhir dalam proses pelatiahn Model Random Forest akan dibantu oleh fungsi fit() dengan matrix evaluasi yang digunakan adalah Mean Squared Error atau MSE. 
 ### Model Devlopment Menggunakan Algoritma Boosting Algorithm
-Algoritme boosting menggabungkan beberapa pembelajar lemah dalam metode berurutan, yang secara iteratif. Pendekatan ini membantu mengurangi bias tinggi yang umum terjadi pada model machine learning. Cara kerjanya adalah membuat model kedua yang bertugas memperbaiki kesalahan dari model pertama. Model ditambahkan sampai data latih terprediksi dengan baik atau telah mencapai jumlah maksimum model untuk ditambahkan.
+Boosting adalah sebuah algoritma ensemble learning yang bertujuan untuk meningkatkan akurasi model prediksi dengan cara menggabungkan sejumlah model lemah (weak learner) menjadi model kuat (strong learner). Penggabungan tersebut dilakukan dengan metode berurutan, yang secara iteratif. Pendekatan ini membantu mengurangi bias tinggi yang umum terjadi pada model machine learning. Cara kerjanya adalah membuat model kedua yang bertugas memperbaiki kesalahan dari model pertama. Model ditambahkan sampai data latih terprediksi dengan baik atau telah mencapai jumlah maksimum model untuk ditambahkan. Ada beberapa algoritma boosting yang populer, tapi pada tahapan kali ini algoritma AdaBoost yang akan digunakan karena salah satu algoritma yang terkenal dapat mencegah overfitting dan komputasinya efisien.
 
-Kali ini, modelling dengan Boosting Algorithm akan menggunakan bantuan hyperparameter tuning untuk menemukan kombinasi nilai optimal untuk hyperparameter dari sebuah model machine learning dengan tujuan meningkatkan performa model.
+Kelebihan Boosting:
+
+* Mampu meningkatkan akurasi model lemah menjadi model kuat.
+* Robust terhadap overfitting.
+* Parallelization mudah dilakukan.
+  
+Kekurangan Boosting:
+
+* Rentan terhadap noise dan outlier.
+* Sulit diinterpretasi karena banyaknya estimator yang dikombinasikan.
+* Sensitif terhadap parameter dan fungsi loss yang dipilih.
+* Lebih lambat karena harus melatih beberapa model.
+  
+Sama seperti sebelumnya, model ini akan menggunakan hyperparameter dari tuning untuk menentukan parameter-parameter yang dibutuhkan dalam pelatihan Model Boosting dengan AdaBoost. [GridSearch](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html) tetap menjadi andalan tetentunya dalam menjalankan teknik tersebut. Proses awal pelatihan adalah pemanggilan metode [AdaBoostRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostRegressor.html) dari library scikit-learn. Kemudian, proses menginput parameter ke dalam metode tersebut berdasarkan hasil teknik hyperparameter tunning dilakukan. Parameter tersebut adalah learning_rate dengan nilai 0.1. Untuk parameter lain yang digunakan dalam permodelan tersebut seperti random_state yang merupakan penambahan manual untuk menentukan seed untuk generator angka acak yang digunakan saat membagi data menjadi subset saat membangun pohon sehingga menghasilkan hasil yang sama setiap kali kode dijalankan. Tahapan akhir dalam menjalankan pelatihan ini juga akan dibantu oleh fungsi fit() dengan matrix evaluasi yang digunakan adalah Mean Squared Error atau MSE.  
+
 ## Evaluasi Model
-Tahap evaluasi dalam membangun model bertujuan untuk mengukur kinerja dan keefektifan model yang telah dibuat. Evaluasi model penting karena memberikan pemahaman tentang seberapa baik model dapat melakukan prediksi atau menggeneralisasi data baru yang tidak terlihat selama pelatihan. Pada tahap ini, penggunaan metrik akan dilakukan. Metrik yang akan digunakan adalah Mean Squared Eror atau MSE. Metrik ini menghitung jumlah selisih kuadrat rata-rata nilai sebenarnya dengan nilai prediksi melalui sebuah persamaan.
+Tahap evaluasi dalam membangun model bertujuan untuk mengukur kinerja dan keefektifan model yang telah dibuat. Evaluasi model penting karena memberikan pemahaman tentang seberapa baik model dapat melakukan prediksi atau menggeneralisasi data baru yang tidak terlihat selama pelatihan. Pada tahap ini, penggunaan metrik akan dilakukan. Metrik yang akan digunakan adalah [Mean Squared Eror](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html)(MSE). Metrik ini menghitung jumlah selisih kuadrat rata-rata nilai sebenarnya dengan nilai prediksi melalui sebuah persamaan sebagai berikut:
 
-Jadi, proses dalam tahap evaluasi adalah scaling numeric features, count MSE for data train and test, plot metrix with bar chart, prediction target variable, Calculates the difference between the predicted value and the y_true value, model accuracy with difference algorithm, and
+$$MSE = \frac{1}{N} \Sigma_{i=1}^N({y_i}- y\_pred_i)^2$$
+
+Keterangan:
+- N = jumlah dataset
+- yi = nilai sebenarnya
+- y_pred = nilai prediksi
+
+Jadi, beberapa proses dalam tahap evaluasi adalah scaling numeric features, count MSE for data train and test, plot metrix with bar chart, prediction target variable, Calculates the difference between the predicted value and the y_true value, and Model Accuracy Based on Each Algorithm.
 ### Scaling numeric features
+Sebelum menghitung nilai MSE, proses scaling akan dilakukan untuk fitur numerik pada data uji. Karena sebelumnya, pada proses scaling hanya pada data latih saja. Setelah model dilatih menggunakan 3 algoritma yaitu KNN, Random Forest dan AdaBoost, proses scaling fitur akan dilakukan pada data uji. Hal ini harus dilakukan agar skala antara data latih dan data uji sama sehingga evaluasi dapat berjalan.
 ### Count MSE for data train and test
 ### Plot metrix with bar chart
 ### Prediction target variable
