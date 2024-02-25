@@ -271,8 +271,15 @@ Selanjutnya, beberapa proses dalam tahap evaluasi yang akan dilakukan adalah sca
 ### Scaling numeric features
 Sebelum menghitung nilai MSE, proses scaling akan dilakukan untuk fitur numerik pada data uji. Karena sebelumnya, pada proses scaling hanya pada data latih saja. Setelah model dilatih menggunakan 3 algoritma yaitu KNN, Random Forest dan AdaBoost, proses scaling fitur akan dilakukan pada data uji. Hal ini harus dilakukan agar skala antara data latih dan data uji sama sehingga evaluasi dapat berjalan.
 ### Count MSE for data train and test
-### Plot metrix with bar chart
+Proses perhitungan nilai MSE dimulai dengan pembuatan DataFrame yang memiliki kolom 'train' dan 'test' serta indeks 'KNN', 'RF', dan 'Boosting'. DataFrame ini akan digunakan untuk menyimpan nilai MSE untuk setiap algoritma pada data latih (train) dan data uji (test). Selanjutnya, dalam iterasi, setiap indeks yang mewakili algoritma akan digunakan untuk menghitung nilai MSE menggunakan data latih dan data uji sebagai input. Berikut hasil dataframe setelah dilakukan perhitungan nilai mse untuk setiap algoritma pada data latih dan data uji.
+|Nama Algoritma|train|test| 
+|---|---|---|
+|KNN|16232.637486|18914.353625|18914.353625|
+|RandomForest|5732.779149|13660.525417|
+|Boosting|69324.69636|70718.092728|
 ### Prediction target variable
+Tahapan plot visualisasi sederhana untuk memudahkan dalam pembacaan hasil diatas.
+![Gambar 11](https://github.com/Symphoen1x/Dicoding_Expert/blob/main/pairplot%20keren.png).
 ### Calculates the difference between the predicted value and the y_true value
 ### Accuracy Model with difference algorithm
 
