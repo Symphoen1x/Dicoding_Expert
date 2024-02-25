@@ -267,7 +267,7 @@ Keterangan:
 - yi = nilai sebenarnya
 - y_pred = nilai prediksi
 
-Jadi, beberapa proses dalam tahap evaluasi adalah scaling numeric features, count MSE for data train and test, plot metrix with bar chart, prediction target variable, Calculates the difference between the predicted value and the y_true value, and Model Accuracy Based on Each Algorithm.
+Selanjutnya, beberapa proses dalam tahap evaluasi yang akan dilakukan adalah scaling numeric features, count MSE for data train and test, plot metrix with bar chart, prediction target variable, Calculates the difference between the predicted value and the y_true value, and Model Accuracy Based on Each Algorithm.
 ### Scaling numeric features
 Sebelum menghitung nilai MSE, proses scaling akan dilakukan untuk fitur numerik pada data uji. Karena sebelumnya, pada proses scaling hanya pada data latih saja. Setelah model dilatih menggunakan 3 algoritma yaitu KNN, Random Forest dan AdaBoost, proses scaling fitur akan dilakukan pada data uji. Hal ini harus dilakukan agar skala antara data latih dan data uji sama sehingga evaluasi dapat berjalan.
 ### Count MSE for data train and test
