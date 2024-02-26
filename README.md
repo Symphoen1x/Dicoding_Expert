@@ -8,7 +8,7 @@ Dengan memanfaatkan data histori harga jual dan spesifikasi mobil, sistem predic
 
 
 
-Beberapa algoritma machine learning yang dapat digunakan antara lain random forest, K-Nearest Neighbors atau KNN, dan Boosting. Penelitian yang berjudul [Used Car Price Prediction with Random Forest Regressor Model](https://journal.stmikjayakarta.ac.id/index.php/jisicom/article/view/752/506) memperkuat gagasan tersebut bahwa Random Forest yang digunakan dalam permodelan kasus prediksi mampu menghasilkan prediksi harga jual mobil bekas dengan akurasi yang baik. Selain itu, penelitian lain yang berjudul [Komparasi Algoritma K-NearestNeighbors dan Random Forest Pada Prediksi Harga Mobil Bekas](https://jurnal.polsri.ac.id/index.php/jupiter/article/view/5435) menunjukan bahwa penggunaan modelling K-Nearest Neighbors menghasilkan performa paling bagus dengan adanya set hyper parameter tunning neighbors. Pada penelitian [Penerapan Model Machine Learning Algoritma Gradient Boosting dan LinearRegression Melakukan Prediksi Harga Kendaraan Bekas](https://jurnal.unity-academy.sch.id/index.php/jirsi/article/view/56/44) menunjukan bahwa Algoritma boosting dengan kombinasi parameter optimal terbukti mampu meningkatkan akurasi prediksi dibandingkan model dasar.
+Beberapa algoritma machine learning yang dapat digunakan antara lain random forest, K-Nearest Neighbors atau *KNN*, dan Boosting. Penelitian yang berjudul [Used Car Price Prediction with Random Forest Regressor Model](https://journal.stmikjayakarta.ac.id/index.php/jisicom/article/view/752/506) memperkuat gagasan tersebut bahwa Random Forest yang digunakan dalam permodelan kasus prediksi mampu menghasilkan prediksi harga jual mobil bekas dengan akurasi yang baik. Selain itu, penelitian lain yang berjudul [Komparasi Algoritma K-NearestNeighbors dan Random Forest Pada Prediksi Harga Mobil Bekas](https://jurnal.polsri.ac.id/index.php/jupiter/article/view/5435) menunjukan bahwa penggunaan modelling K-Nearest Neighbors menghasilkan performa paling bagus dengan adanya set hyper parameter tunning neighbors. Pada penelitian [Penerapan Model Machine Learning Algoritma Gradient Boosting dan LinearRegression Melakukan Prediksi Harga Kendaraan Bekas](https://jurnal.unity-academy.sch.id/index.php/jirsi/article/view/56/44) menunjukan bahwa Algoritma boosting dengan kombinasi parameter optimal terbukti mampu meningkatkan akurasi prediksi dibandingkan model dasar.
 
 Kesimpulan yang didapat bahwa penggunaan ketiga algoritma diatas sebagai solusi dalam membangun model prediksi. Model tersebut diharapkan dapat membantu produsen dalam menentukan harga yang kompetitif di pasar dan dealer mobil dalam merumuskan strategi penetapan harga yang optimal. Untuk proses pengembangan model kasus tersebut, dataset yang digunakan berisi fitur-fitur terkait komponen-komponen dalam mobil. Dataset tersebut disusun dengan teknik scraped dari Twitter dan Edmunds oleh penyedia sumber asal dataset yang terdapat di platform [Kaggle](https://www.kaggle.com/datasets/CooperUnion/cardataset)
 
@@ -219,24 +219,24 @@ Tabel 4. Dataframe hasil akhir setelah proses standarisasi pada fitur numerik.
   
 ## Model Devlopment
 Proses kali ini menunjukan penggunaan machine learning dengan beberapa Algoritma yang akan digunakan. Algoritma yang akan digunakan pada proses Model Devploment kali ini ada tiga, yaitu K-Nearest Neighbor, Random Forest, dan Boosting Algorithm. Sebelum itu, pembuatan DataFrame yang berisi ketiga algoritma diatas untuk membandingkan hasil prediksi terbaik perlu dibuat. Tidak lupa untuk menggunakan hyperparameter tuning [GridSearch](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html) dalam proses pelatihan model dengan kaetiga algoritma tersebut. Tujuanya untuk mengingkatkan performa model yang dilatih. Parameter ini nantinya dibutuhkan dalam mencari parameter terbaik dari masing masing algoritma yang dilakukan pelatihan.
-### Model Devlopment Menggunakan Algoritma K-Nearest Neighbor atau KNN
-[KNN](https://www.ibm.com/topics/knn#:~:text=Next%20steps-,K-Nearest%20Neighbors%20Algorithm,of%20an%20individual%20data%20point) adalah algoritma yang relatif sederhana dibandingkan dengan algoritma lain. Algoritma KNN menggunakan ‘kesamaan fitur’ untuk memprediksi nilai dari setiap data yang baru. Dengan kata lain, setiap data baru diberi nilai berdasarkan seberapa mirip titik tersebut dalam set pelatihan. KNN ini cocok digunakan untuk kasus regresi dan klasifikasi dalam machine learning.
+### Model Devlopment Menggunakan Algoritma K-Nearest Neighbor atau *KNN*
+[KNN](https://www.ibm.com/topics/knn#:~:text=Next%20steps-,K-Nearest%20Neighbors%20Algorithm,of%20an%20individual%20data%20point) adalah algoritma yang relatif sederhana dibandingkan dengan algoritma lain. Algoritma *KNN* menggunakan ‘kesamaan fitur’ untuk memprediksi nilai dari setiap data yang baru. Dengan kata lain, setiap data baru diberi nilai berdasarkan seberapa mirip titik tersebut dalam set pelatihan. *KNN* ini cocok digunakan untuk kasus regresi dan klasifikasi dalam machine learning.
 Algoritma K-Nearest Neighbor (KNN) bekerja dengan cara mencari K tetangga terdekat data input baru berdasarkan jaraknya, lalu memprediksi output berdasarkan rata-rata output tetangga tersebut.
 
-Kelebihan KNN:
+Kelebihan *KNN*:
 
 * Sederhana untuk diimplementasikan dan dimengerti.
 * Tidak memerlukan pelatihan model secara eksplisit.
 * Fleksibel dan dapat menangani data non-linear.
   
-Kekurangan KNN:
+Kekurangan *KNN*:
 
 * Sensitif terhadap noisy data dan outlier.
 * Membutuhkan banyak memori untuk menyimpan seluruh data latih.
 * Prediksi dapat menjadi lambat karena perhitungan jarak untuk data latih yang besar.
 * Hasil sangat tergantung pada pemilihan nilai K dan fungsi jarak yang digunakan.
   
-Kali ini, modelling dengan Algoritma KNN akan menggunakan bantuan hyperparameter tuning [GridSearch](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html) untuk menemukan kombinasi nilai yang optimal terhadap parameter model tersebut agar nantinya dapa meningkatkan performa model. Proses awal penggunaan algortima ini dilakukan pemanggilan metode [KNeighborsRegressor()](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html) dari library scikit-learn. Kemudian parameter yang digunakan di algoritma ini, yaitu n_neigbors akan di sesuaikan berdasarkan hyperparameter tunning. Output yang muncul dari proses tersebut adalah skor RandomSearch untuk KNN sebesar -23871881.20319546 dan parameter n_neigbors = 10. Kemudian, masuk ke proses pelatihan model KNN dengan parameter n_neigbors menggunakan hasil dari tahapan sebelumnya. Model ditrain oleh fungsi fit() dengan matrix evaluasi yang digunakan adalah Mean Squared Error atau MSE. 
+Kali ini, modelling dengan Algoritma *KNN* akan menggunakan bantuan hyperparameter tuning [GridSearch](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html) untuk menemukan kombinasi nilai yang optimal terhadap parameter model tersebut agar nantinya dapa meningkatkan performa model. Proses awal penggunaan algortima ini dilakukan pemanggilan metode [KNeighborsRegressor()](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html) dari library scikit-learn. Kemudian parameter yang digunakan di algoritma ini, yaitu n_neigbors akan di sesuaikan berdasarkan hyperparameter tunning. Output yang muncul dari proses tersebut adalah skor RandomSearch untuk *KNN* sebesar -23871881.20319546 dan parameter n_neigbors = 10. Kemudian, masuk ke proses pelatihan model *KNN* dengan parameter n_neigbors menggunakan hasil dari tahapan sebelumnya. Model ditrain oleh fungsi fit() dengan matrix evaluasi yang digunakan adalah Mean Squared Error atau MSE. 
 ### Model Devlopment Menggunakan Algoritma Random Forest
 Random forest merupakan salah satu model machine learning yang termasuk ke dalam kategori ensemble (group) learning. Apa itu model ensemble? Sederhananya, ia merupakan model prediksi yang terdiri dari beberapa model dan bekerja secara bersama-sama. Random Forest bekerja dengan membangun sejumlah pohon keputusan (decision trees) dari data latih dengan melakukan sampling acak baik pada data maupun fiturnya. Setiap pohon akan tumbuh secara maksimal tanpa pruning. Kemudian, hasil prediksi dari masing-masing pohon ini akan digabungkan dengan rata-rata (average) atau voting untuk mendapatkan estimasi model akhir.
 
@@ -283,8 +283,7 @@ Sama seperti sebelumnya, model ini akan menggunakan hyperparameter dari tuning u
 ## Evaluasi Model
 Tahap evaluasi dalam membangun model bertujuan untuk mengukur kinerja dan keefektifan model yang telah dibuat. Evaluasi model penting karena memberikan pemahaman tentang seberapa baik model dapat melakukan prediksi atau menggeneralisasi data baru yang tidak terlihat selama pelatihan. Pada tahap ini, penggunaan metrik akan dilakukan. Metrik yang akan digunakan adalah [Mean Squared Eror](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html)(MSE). Metrik ini menghitung jumlah selisih kuadrat rata-rata nilai sebenarnya dengan nilai prediksi melalui sebuah persamaan sebagai berikut:
 
-$$MSE = \frac{1}{N} \Sigma_{i=1}^N({y_i}- y\_pred_i)^2$$
-
+$$MSE = {\sum{(Y_t - Y_p)^2} \over n}$$
 Keterangan:
 - N = jumlah dataset
 - yi = nilai sebenarnya
@@ -292,7 +291,7 @@ Keterangan:
 
 Selanjutnya, beberapa proses dalam tahap evaluasi yang akan dilakukan adalah scaling numeric features, count MSE for data train and test, prediction target variable, Calculates the difference between the predicted value and the y_true value, and Model Accuracy Based on Each Algorithm.
 ### Scaling numeric features
-Sebelum menghitung nilai MSE, proses scaling akan dilakukan untuk fitur numerik pada data uji. Karena sebelumnya, pada proses scaling hanya pada data latih saja. Setelah model dilatih menggunakan 3 algoritma yaitu KNN, Random Forest dan AdaBoost, proses scaling fitur akan dilakukan pada data uji. Hal ini harus dilakukan agar skala antara data latih dan data uji sama sehingga evaluasi dapat berjalan.
+Sebelum menghitung nilai MSE, proses scaling akan dilakukan untuk fitur numerik pada data uji. Karena sebelumnya, pada proses scaling hanya pada data latih saja. Setelah model dilatih menggunakan 3 algoritma yaitu *KNN*, Random Forest dan AdaBoost, proses scaling fitur akan dilakukan pada data uji. Hal ini harus dilakukan agar skala antara data latih dan data uji sama sehingga evaluasi dapat berjalan.
 ### Count MSE for data train and test
 Proses perhitungan nilai MSE dimulai dengan pembuatan DataFrame yang memiliki kolom 'train' dan 'test' serta indeks 'KNN', 'RF', dan 'Boosting'. DataFrame ini akan digunakan untuk menyimpan nilai MSE untuk setiap algoritma pada data latih (train) dan data uji (test). Selanjutnya, dalam iterasi, setiap indeks yang mewakili algoritma akan digunakan untuk menghitung nilai MSE menggunakan data latih dan data uji sebagai input.  
 
@@ -309,10 +308,10 @@ Tabel 5 menunjukan perbadingan ketiga algoritma dalam menghitung mse pada data l
 
 Gambar 11. Tahapan plot visualisasi sederhana untuk memudahkan dalam pembacaan hasil diatas.
 
-Dari Gambar 11, terlihat bahwa, model Random Forest (RF) memberikan nilai eror yang paling kecil dibandingkan algoritma lain seperti KNN dan Boosting Algorithm. Sedangkan model dengan algoritma Boosting memiliki eror yang paling besar (berdasarkan grafik, angkanya di atas 60000). Maka dari itu,  model Random Forest yang akan dipilih sebagai model terbaik untuk memprediksi harga jual mobil.
+Dari Gambar 11, terlihat bahwa, model Random Forest (RF) memberikan nilai eror yang paling kecil dibandingkan algoritma lain seperti *KNN* dan Boosting Algorithm. Sedangkan model dengan algoritma Boosting memiliki eror yang paling besar (berdasarkan grafik, angkanya di atas 60000). Maka dari itu,  model Random Forest yang akan dipilih sebagai model terbaik untuk memprediksi harga jual mobil.
 ### Prediction target variable
 Prediksi pada Tabel 6 adalah pembuktian untuk menjawab problem statement diatas, yaitu Berapa estimasi harga jual mobil berdasarkan fitur-fitur yang paling berpengaruh dengan Harga_Jual?
-Tabel 6. Hasil prediksi nilai target berdasarkan ketiga model algoritma(KNN, RandomForest,dan Boosting) menggunakan beberapa harga dari data test.
+Tabel 6. Hasil prediksi nilai target berdasarkan ketiga model algoritma(*KNN*, *RandomForest*,dan *Boosting*) menggunakan beberapa harga dari data test.
 |index|y\_true|prediksi\_KNN|prediksi\_RandomForest|prediksi\_Boosting|
 |---|---|---|---|---|
 |2992|68855|68385\.0|69552\.0|60912\.8|
@@ -328,17 +327,14 @@ Tabel 6. Hasil prediksi nilai target berdasarkan ketiga model algoritma(KNN, Ran
 
 Tabel diatas dapat digunakan 
 ### Calculates the difference between the predicted value and the y_true value
-Tujuan dari perhitungan rata-rata selisih antara nilai sebenarnya dan nilai prediksi dari ketiga model adalah untuk membandingkan performa relatif dari ketiga model tersebut. Ketiga model tersebut memiliki nilai absolut dari rata-rata selisih antara nilai aktual (y_true). Nilai prediksi yang terkecil mengindikasikan bahwa model cenderung memiliki kinerja yang lebih baik. Dalam konteks prediksi, nilai selisih yang lebih kecil menunjukkan bahwa prediksi model lebih mendekati nilai aktual. Hasil yang muncul tetap sama bahwa model dengan RandomForestlah yang tetap menjadi model terbaik dengan nilai rata-rata selisih terkecil sebanyak 2449.79, disusul oleh MOdel KNN sebanyak 3544.4, dan terakhir oleh Boosting sebanyak 9203.43.
+Tujuan dari perhitungan rata-rata selisih antara nilai sebenarnya dan nilai prediksi dari ketiga model adalah untuk membandingkan performa relatif dari ketiga model tersebut. Ketiga model tersebut memiliki nilai absolut dari rata-rata selisih antara nilai aktual (y_true). Nilai prediksi yang terkecil mengindikasikan bahwa model cenderung memiliki kinerja yang lebih baik. Dalam konteks prediksi, nilai selisih yang lebih kecil menunjukkan bahwa prediksi model lebih mendekati nilai aktual. Hasil yang muncul tetap sama bahwa model dengan RandomForestlah yang tetap menjadi model terbaik dengan nilai rata-rata selisih terkecil sebanyak 2449.79, disusul oleh Model *KNN* sebanyak 3544.4, dan terakhir oleh Boosting sebanyak 9203.43.
 ### Accuracy Model with difference algorithm
 Metode [Score](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.accuracy_score.html) dari library skcit-learn dapat membantu dalam pemilihan model terbaik untuk digunakan dalam suatu tugas atau masalah tertentu seperti regresi. Model dengan skor yang lebih tinggi cenderung memberikan prediksi yang lebih baik atau hasil yang lebih akurat.
 
 Berdasarkan hasil perbadingan ketiga model, terlihat kembali bahwa pada bagian akurasi model menggunakan algoritma Random Forest menghasilkan skor yang cukup baik, yaitu 0.9313177979043304. Skor model ini menjadi yang terbaik diantara kedua model lain.
 ## Conclusion
-Berdasarkan beberapa tahapan yang telah dilakukan, kesimpulan diperoleh sebagai berikut:
-
-* Pemahaman mengenai Domain Proyek yang berisi latar belakang proyek, tujuan dan kebutuhan proyek, dan riset atau sumber referensi yang relevan dengan proyek telah disertakan.
-* Pemahaman mengenai kasus bisnis yang berisi problem statemnets, goals, dan solution statements telah terselesaikan dan terbuktikan hasilnya.
-* Pendeskripsian dan pemahaman mengenai informasi data-data, sumber dara, visualisasi data dan fitur/variabel yang digunakan sangat mendukung tahap-tahap pra-permodelan.
-* Tahapan persiapan data yang terdiri Encoding fitur kategori, reduksi dengan Principal Component Analysis(PCA), Pembagian dataset, dan teknik standarisasi berhasil untuk dilakukan.
-* Proses modeling melalui perbandingan tiga algoritma regresi seperti K-Nearest Neighbor, Random Forest, dan Bosting Algorithm menjadi acuan dalam pemilihan model proyek.
-* Tahap evaluasi model menunjukan hasil yang berbeda-beda dengan terpilihnya Model Random Forest sebagai model terbaik untuk prediksi harga jual proyek ini.
+Berdasarkan analisis yang telah dilakukan pada proyek prediksi harga jual movil ini, dapat disimpulkan bahwa telah dilakukan pemahaman mendalam mengenai domain proyek meliputi latar belakang, tujuan, kebutuhan, dan referensi relevan. Data, fitur, dan variabel yang digunakan telah dipahami dan diolah dengan baik melalui encoding, PCA, pembagian dataset, dan standarisasi. Proses permodelan juga telah dilakukan dengan membandingkan 3 algoritma regresi yaitu *KNN*, *Random Forest*, dan *Boosting*, serta penggunaan hyperparameter tunning dengan GridSearch dimana Random Forest terpilih sebagai model terbaik untuk prediksi harga jual mobil pada proyek ini.
+Dengan demikian, goals untuk mengetahui fitur yang berpengaruh terhadap harga jual serta membuat model prediksi harga jual mobil akurat berdasarkan fitur tersebut juga telah berhasil dicapai melalui analisis yang komprehensif dalam proyek ini. Jadi prediksi harga mobil telah sesuai harapan dan dapat digunakan menjawab problem bisnis yang ada. Model tersebut diharapkan dapat membantu produsen dalam menentukan harga yang kompetitif di pasar dan dealer mobil dalam merumuskan strategi penetapan harga yang optimal.
+## Reference
+[1]  d
+[2]  d
