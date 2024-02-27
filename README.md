@@ -8,7 +8,7 @@ Dengan memanfaatkan data histori harga jual dan spesifikasi mobil, sistem predic
 
 Beberapa algoritma machine learning yang dapat digunakan antara lain *random forest*, *K-Nearest Neighbors (KNN)*, dan *Boosting*. Sebuah Penelitian memperkuat gagasan tersebut bahwa *Random Forest* yang digunakan dalam permodelan kasus prediksi mampu menghasilkan prediksi harga jual mobil bekas dengan akurasi yang baik [[2]](https://journal.stmikjayakarta.ac.id/index.php/jisicom/article/view/752/506). Selian itu, penggunaan modelling *K-Nearest Neighbors* menghasilkan performa paling bagus dengan adanya set hyper parameter tunning neighbors  [[3]](https://jurnal.polsri.ac.id/index.php/jupiter/article/view/5435). Pada modelling dengan algorimta *boosting* juga menunjukan bahwa algoritma tersebut dengan kombinasi parameter yang optimal terbukti mampu meningkatkan akurasi prediksi dibandingkan model dasar [[4]](https://jurnal.unity-academy.sch.id/index.php/jirsi/article/view/56/44).
 
-Kesimpulan yang didapat bahwa penggunaan ketiga algoritma diatas sebagai solusi dalam membangun model prediksi. Model tersebut diharapkan dapat membantu produsen dalam menentukan harga yang kompetitif di pasar dan dealer mobil dalam merumuskan strategi penetapan harga yang optimal. Untuk proses pengembangan model kasus tersebut, dataset yang digunakan berisi fitur-fitur terkait komponen-komponen dalam mobil. Dataset tersebut disusun dengan teknik scraped dari Twitter dan Edmunds oleh penyedia sumber asal dataset yang terdapat di platform [Car Features and MSRP](https://www.kaggle.com/datasets/CooperUnion/cardataset)
+Kesimpulan yang didapat bahwa penggunaan ketiga algoritma diatas sebagai solusi dalam membangun model prediksi. Model tersebut diharapkan dapat membantu produsen dalam menentukan harga yang kompetitif di pasar dan dealer mobil dalam merumuskan strategi penetapan harga yang optimal. Untuk proses pengembangan model kasus tersebut, dataset yang digunakan berisi fitur-fitur terkait komponen-komponen dalam mobil. Dataset tersebut disusun dengan teknik scraped dari Twitter dan Edmunds oleh penyedia sumber asal dataset yang terdapat di platform kaggle [[5]](https://www.kaggle.com/datasets/CooperUnion/cardataset)
 
 ## Business Understanding
 ### 1. Problem Statements
@@ -28,9 +28,9 @@ Untuk kedua problem statemnets diatas, solusi yang akan digunakan sebagai beriku
 Prediksi harga adalah tujuan yang ingin dicapai dan harga merupakan variabel kontinu. Dalam predictive analytics, untuk data yang bersifat variabel kontinu artinya merupakan permasalahan regresi. Oleh karena itu, metodologi pada proyek ini adalah: membangun model regresi dengan harga jual mobil sebagai variabel target(dependent variable) dan fitur-fitur utama mobil sebagai variabel prediktor(independent variabel).
 
 ## Data Understanding
-Proyek ini menggunakan dataset yang bernama [Car Features and MSRP](https://www.kaggle.com/datasets/CooperUnion/cardataset). Dataset ini memiliki 11.913 baris dan 16 kolom. Fitur-fitur di dalamnya terdiri dari merek, model, tahun produksi, bahan bakar, dan fitur lain. Dataset ini digunakan untuk memprediksi harga jual mobil yang berada di USA dari tahun 1990-2018. Cara pengambilan dataset ini berdasarkan sumber pengelola menggunakan teknik Scraped dari Emunds dan Twitter.
+Proyek ini menggunakan dataset yang memiliki 11.913 baris dan 16 kolom. Fitur-fitur di dalamnya terdiri dari merek, model, tahun produksi, bahan bakar, dan fitur lain. Dataset ini digunakan untuk memprediksi harga jual mobil yang berada di USA dari tahun 1990-2018. Cara pengambilan dataset ini berdasarkan sumber pengelola menggunakan teknik Scraped dari Emunds dan Twitter.
 ### Description variable
-Variabel - variabel yang ada dalam dataset [Car Features and MSRP](https://www.kaggle.com/datasets/CooperUnion/cardataset) sebagai berikut:
+Variabel - variabel yang ada dalam dataset sebagai berikut:
 * Make: Merek/manufaktur mobil (BMW, Acura, linkoln, dll). Variabel ini berjumlah 48 nilai unik dan bertipe data kategorikal.
 *	Model: Model spesifik dari mobil (1 Series M, 1 Series, dll). Variabel ini memiliki nilai unik yang banyak sekali dengan jumlah 915 unit. Variabel ini bertipe data kategorikal. 
 *	Year: Tahun produksi mobil. Year/tahun produksi adalah Variabel dengan jumlah nilai unik sebanyak 28 dan variabel dengan tipe data numerik.
@@ -216,9 +216,9 @@ Tabel 4. Dataframe hasil akhir setelah proses standarisasi pada fitur numerik.
   Berdasarkan output diatas, terlihat benar bukan bahwa standarisasi mengubah nilai mean menjadi 0 dan nilai standar devisiasi menjadi 1. Sekitar 68% dari nilai akan berada di antara -1 dan 1.
   
 ## Model Devlopment
-Proses kali ini menunjukan penggunaan machine learning dengan beberapa Algoritma yang akan digunakan. Algoritma yang akan digunakan pada proses Model Devploment kali ini ada tiga, yaitu K-Nearest Neighbor, *Random Forest*, dan *Boosting Algorithm*. Sebelum itu, pembuatan DataFrame yang berisi ketiga algoritma diatas untuk membandingkan hasil prediksi terbaik perlu dibuat. Tidak lupa untuk menggunakan hyperparameter tuning [GridSearch](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html) dalam proses pelatihan model dengan kaetiga algoritma tersebut. Tujuanya untuk mengingkatkan performa model yang dilatih. Parameter ini nantinya dibutuhkan dalam mencari parameter terbaik dari masing masing algoritma yang dilakukan pelatihan.
+Proses kali ini menunjukan penggunaan machine learning dengan beberapa Algoritma yang akan digunakan. Algoritma yang akan digunakan pada proses Model Devploment kali ini ada tiga, yaitu K-Nearest Neighbor, *Random Forest*, dan *Boosting Algorithm*. Sebelum itu, pembuatan DataFrame yang berisi ketiga algoritma diatas untuk membandingkan hasil prediksi terbaik perlu dibuat. Tidak lupa untuk menggunakan hyperparameter tuning *GridSearch* dari library scikit-learn dalam proses pelatihan model dengan kaetiga algoritma tersebut. Tujuanya untuk mengingkatkan performa model yang dilatih [[6]](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html). Parameter ini nantinya dibutuhkan dalam mencari parameter terbaik dari masing masing algoritma yang dilakukan pelatihan.
 ### Model Devlopment Menggunakan Algoritma *K-Nearest Neighbor atau KNN*
-[KNN](https://www.ibm.com/topics/knn#:~:text=Next%20steps-,K-Nearest%20Neighbors%20Algorithm,of%20an%20individual%20data%20point) adalah algoritma yang relatif sederhana dibandingkan dengan algoritma lain. Algoritma *KNN* menggunakan ‘kesamaan fitur’ untuk memprediksi nilai dari setiap data yang baru. Dengan kata lain, setiap data baru diberi nilai berdasarkan seberapa mirip titik tersebut dalam set pelatihan. *KNN* ini cocok digunakan untuk kasus regresi dan klasifikasi dalam machine learning.
+*KNN* adalah algoritma yang relatif sederhana dibandingkan dengan algoritma lain [[7]](https://www.ibm.com/topics/knn#:~:text=Next%20steps-,K-Nearest%20Neighbors%20Algorithm,of%20an%20individual%20data%20point). Algoritma ini menggunakan ‘kesamaan fitur’ untuk memprediksi nilai dari setiap data yang baru. Dengan kata lain, setiap data baru diberi nilai berdasarkan seberapa mirip titik tersebut dalam set pelatihan. *KNN* ini cocok digunakan untuk kasus regresi dan klasifikasi dalam machine learning.
 Algoritma *K-Nearest Neighbor (KNN)* bekerja dengan cara mencari K tetangga terdekat data input baru berdasarkan jaraknya, lalu memprediksi output berdasarkan rata-rata output tetangga tersebut.
 
 Kelebihan *KNN*:
@@ -234,7 +234,7 @@ Kekurangan *KNN*:
 * Prediksi dapat menjadi lambat karena perhitungan jarak untuk data latih yang besar.
 * Hasil sangat tergantung pada pemilihan nilai K dan fungsi jarak yang digunakan.
   
-Kali ini, modelling dengan Algoritma *KNN* akan menggunakan bantuan hyperparameter tuning [GridSearch](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html) untuk menemukan kombinasi nilai yang optimal terhadap parameter model tersebut agar nantinya dapa meningkatkan performa model. Proses awal penggunaan algortima ini dilakukan pemanggilan metode [KNeighborsRegressor()](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html) dari library scikit-learn. Kemudian parameter yang digunakan di algoritma ini, yaitu n_neigbors akan di sesuaikan berdasarkan hyperparameter tunning. Output yang muncul dari proses tersebut adalah skor *RandomSearch* untuk *KNN* sebesar -23871881.20319546 dan parameter n_neigbors = 10. Kemudian, masuk ke proses pelatihan model *KNN* dengan parameter n_neigbors menggunakan hasil dari tahapan sebelumnya. Model ditrain oleh fungsi fit() dengan matrix evaluasi yang digunakan adalah Mean Squared Error atau MSE. 
+Kali ini, modelling dengan Algoritma *KNN* akan menggunakan bantuan hyperparameter tuning  untuk menemukan kombinasi nilai yang optimal terhadap parameter model tersebut agar nantinya dapa meningkatkan performa model. Proses awal penggunaan algortima ini dilakukan pemanggilan metode KNeighborsRegressor dari library scikit-learn [[(8)]](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html). Kemudian parameter yang digunakan di algoritma ini, yaitu *n_neigbors* akan di sesuaikan berdasarkan hyperparameter tunning. Output yang muncul dari proses tersebut adalah skor *RandomSearch* untuk *KNN* sebesar -23871881.20319546 dan parameter n_neigbors dengan nilai 10. Kemudian, masuk ke proses pelatihan model *KNN* dengan parameter n_neigbors menggunakan hasil dari tahapan sebelumnya. Model ditrain oleh fungsi fit dengan matrix evaluasi yang digunakan adalah *Mean Squared Error atau MSE*. 
 ### Model Devlopment Menggunakan Algoritma *Random Forest*
 *Random forest* merupakan salah satu model machine learning yang termasuk ke dalam kategori ensemble (group) learning. Apa itu model ensemble? Sederhananya, ia merupakan model prediksi yang terdiri dari beberapa model dan bekerja secara bersama-sama. *Random Forest* bekerja dengan membangun sejumlah pohon keputusan (decision trees) dari data latih dengan melakukan sampling acak baik pada data maupun fiturnya. Setiap pohon akan tumbuh secara maksimal tanpa pruning. Kemudian, hasil prediksi dari masing-masing pohon ini akan digabungkan dengan rata-rata (average) atau voting untuk mendapatkan estimasi model akhir.
 
@@ -253,13 +253,13 @@ Kekurangan *Random Forest*:
 * Sensitif terhadap noise dan outlier jika tidak ditangani dengan baik.
 * Hasilnya mungkin overfit jika ada pohon yang sangat kuat pengaruhnya.
 
-Kembali lagi dalam penyesuaian hyperparameter, model *Random Forest* akan menggunakan teknik hyperparameter tunning dari [GridSearch](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html). Tahap awal seperti biasa akan dilakukan pemanggilan metode [RandomForestRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html) dari library Scikit-learn.  Kemudian parameter yang digunakan di algoritma ini, yaitu n_estimators, max_depth, random_state, dan n_jobs. Nilai dari masing-masing parameter diinput berdasarkan hasil hyperparameter tunning sebelumnya. Sebelumnya, apa maksud dari parameter-parameter tersebut:  
+Kembali lagi dalam penyesuaian hyperparameter, model *Random Forest* akan menggunakan teknik hyperparameter tunning *GridSearch* Tahap awal seperti biasa akan dilakukan pemanggilan metode *RandomForestRegressor* dari library Scikit-learn [[9]](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html). Kemudian parameter yang digunakan di algoritma ini, yaitu *n_estimators*, *max_depth*, *random_state*, dan *n_jobs*. Nilai dari masing-masing parameter diinput berdasarkan hasil hyperparameter tunning sebelumnya. Sebelumnya, apa maksud dari parameter-parameter tersebut:  
 * n_estimators untuk menentukan jumlah pohon keputusan yang akan dibangun dalam model ensemble. Semakin besar nilai n_estimators, semakin kompleks model ensemble tersebut.
 * n_jobs untuk  menentukan jumlah pekerjaan paralel yang akan dijalankan saat melatih model. Ketika diatur ke nilai -1, itu berarti menggunakan semua core CPU yang tersedia.
 * max_depth untuk mengontrol kedalaman maksimum dari setiap pohon keputusan dalam ensemble. Semakin besar nilai max_depth, semakin kompleks modelnya.
   
 Sebagai tambahan, terdapat parameter *random_state* yang merupakan penambahan manual untuk menentukan seed untuk generator angka acak yang digunakan saat membagi data menjadi subset saat membangun pohon sehingga menghasilkan hasil yang sama setiap kali kode dijalankan.
-Tahapan terakhir dalam proses pelatiahn Model *Random Forest* akan dibantu oleh fungsi fit() dengan matrix evaluasi yang digunakan adalah Mean Squared Error atau MSE. 
+Tahapan terakhir dalam proses pelatiahn Model *Random Forest* akan dibantu oleh fungsi fit dengan matrix evaluasi yang digunakan adalah *Mean Squared Error atau MSE*. 
 ### Model Devlopment Menggunakan Algoritma *Boosting Algorithm*
 *Boosting* adalah sebuah algoritma ensemble learning yang bertujuan untuk meningkatkan akurasi model prediksi dengan cara menggabungkan sejumlah model lemah (weak learner) menjadi model kuat (strong learner). Penggabungan tersebut dilakukan dengan metode berurutan, yang secara iteratif. Pendekatan ini membantu mengurangi bias tinggi yang umum terjadi pada model machine learning. Cara kerjanya adalah membuat model kedua yang bertugas memperbaiki kesalahan dari model pertama. Model ditambahkan sampai data latih terprediksi dengan baik atau telah mencapai jumlah maksimum model untuk ditambahkan. Ada beberapa algoritma *boosting* yang populer, tapi pada tahapan kali ini algoritma AdaBoost yang akan digunakan karena salah satu algoritma yang terkenal dapat mencegah overfitting dan komputasinya efisien.
 
@@ -276,10 +276,10 @@ Kekurangan *Boosting*:
 * Sensitif terhadap parameter dan fungsi loss yang dipilih.
 * Lebih lambat karena harus melatih beberapa model.
   
-Sama seperti sebelumnya, model ini akan menggunakan hyperparameter dari tuning untuk menentukan parameter-parameter yang dibutuhkan dalam pelatihan Model *Boosting* dengan AdaBoost. [GridSearch](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html) tetap menjadi andalan tetentunya dalam menjalankan teknik tersebut. Proses awal pelatihan adalah pemanggilan metode [AdaBoostRegressor](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostRegressor.html) dari library scikit-learn. Kemudian, proses menginput parameter ke dalam metode tersebut berdasarkan hasil teknik hyperparameter tunning dilakukan. Parameter tersebut adalah learning_rate dengan nilai 0.1. Untuk parameter lain yang digunakan dalam permodelan tersebut seperti *random_state* yang merupakan penambahan manual untuk menentukan seed untuk generator angka acak yang digunakan saat membagi data menjadi subset saat membangun pohon sehingga menghasilkan hasil yang sama setiap kali kode dijalankan. Tahapan akhir dalam menjalankan pelatihan ini juga akan dibantu oleh fungsi fit() dengan matrix evaluasi yang digunakan adalah Mean Squared Error atau MSE.  
+Sama seperti sebelumnya, model ini akan menggunakan hyperparameter dari tuning untuk menentukan parameter-parameter yang dibutuhkan dalam pelatihan Model *Boosting* dengan AdaBoost. *GridSearch* tetap menjadi andalan tetentunya dalam menjalankan teknik tersebut. Proses awal pelatihan adalah pemanggilan metode *AdaBoostRegressor* dari library scikit-learn [[10]](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostRegressor.html). Kemudian, proses menginput parameter ke dalam metode tersebut berdasarkan hasil teknik hyperparameter tunning dilakukan. Parameter tersebut adalah *learning_rate* dengan nilai 0.1. Untuk parameter lain yang digunakan dalam permodelan tersebut seperti *random_state* yang merupakan penambahan manual untuk menentukan seed untuk generator angka acak yang digunakan saat membagi data menjadi subset saat membangun pohon sehingga menghasilkan hasil yang sama setiap kali kode dijalankan. Tahapan akhir dalam menjalankan pelatihan ini juga akan dibantu oleh fungsi fit dengan matrix evaluasi yang digunakan adalah *Mean Squared Error atau MSE*.  
 
 ## Evaluasi Model
-Tahap evaluasi dalam membangun model bertujuan untuk mengukur kinerja dan keefektifan model yang telah dibuat. Evaluasi model penting karena memberikan pemahaman tentang seberapa baik model dapat melakukan prediksi atau menggeneralisasi data baru yang tidak terlihat selama pelatihan. Pada tahap ini, penggunaan metrik akan dilakukan. Metrik yang akan digunakan adalah [Mean Squared Eror](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html)(MSE). Metrik ini menghitung jumlah selisih kuadrat rata-rata nilai sebenarnya dengan nilai prediksi melalui sebuah persamaan sebagai berikut:
+Tahap evaluasi dalam membangun model bertujuan untuk mengukur kinerja dan keefektifan model yang telah dibuat. Evaluasi model penting karena memberikan pemahaman tentang seberapa baik model dapat melakukan prediksi atau menggeneralisasi data baru yang tidak terlihat selama pelatihan. Pada tahap ini, penggunaan metrik akan dilakukan. Metrik yang akan digunakan adalah *Mean Squared Eror(MSE)* dari library Scikit-learn [[11]](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html). Metrik ini menghitung jumlah selisih kuadrat rata-rata nilai sebenarnya dengan nilai prediksi melalui sebuah persamaan sebagai berikut:
 
 $$MSE = {\sum{(Y_t - Y_p)^2} \over n}$$
 Keterangan:
@@ -287,15 +287,15 @@ Keterangan:
 - yi = nilai sebenarnya
 - y_pred = nilai prediksi
 
-Selanjutnya, beberapa proses dalam tahap evaluasi yang akan dilakukan adalah scaling numeric features, count MSE for data train and test, prediction target variable, Calculates the difference between the predicted value and the y_true value, and Model Accuracy Based on Each Algorithm.
+Selanjutnya, beberapa proses dalam tahap evaluasi yang akan dilakukan adalah scaling numeric features, count *MSE* for data train and test, prediction target variable, Calculates the difference between the predicted value and the y_true value, and Model Accuracy Based on Each Algorithm.
 ### Scaling numeric features
-Sebelum menghitung nilai MSE, proses scaling akan dilakukan untuk fitur numerik pada data uji. Karena sebelumnya, pada proses scaling hanya pada data latih saja. Setelah model dilatih menggunakan 3 algoritma yaitu *KNN*, Random Forest dan AdaBoost, proses scaling fitur akan dilakukan pada data uji. Hal ini harus dilakukan agar skala antara data latih dan data uji sama sehingga evaluasi dapat berjalan.
-### Count MSE for data train and test
-Proses perhitungan nilai MSE dimulai dengan pembuatan DataFrame yang memiliki kolom 'train' dan 'test' serta indeks 'KNN', 'RF', dan 'Boosting'. DataFrame ini akan digunakan untuk menyimpan nilai MSE untuk setiap algoritma pada data latih (train) dan data uji (test). Selanjutnya, dalam iterasi, setiap indeks yang mewakili algoritma akan digunakan untuk menghitung nilai MSE menggunakan data latih dan data uji sebagai input.  
+Sebelum menghitung nilai *MSE*, proses scaling akan dilakukan untuk fitur numerik pada data uji. Karena sebelumnya, pada proses scaling hanya pada data latih saja. Setelah model dilatih menggunakan 3 algoritma yaitu *KNN*, Random Forest dan AdaBoost, proses scaling fitur akan dilakukan pada data uji. Hal ini harus dilakukan agar skala antara data latih dan data uji sama sehingga evaluasi dapat berjalan.
+### Count *MSE* for data train and test
+Proses perhitungan nilai *MSE* dimulai dengan pembuatan DataFrame yang memiliki kolom 'train' dan 'test' serta indeks 'KNN', 'RF', dan 'Boosting'. DataFrame ini akan digunakan untuk menyimpan nilai tersebut untuk setiap algoritma pada data latih (train) dan data uji (test). Selanjutnya, dalam iterasi, setiap indeks yang mewakili algoritma akan digunakan untuk menghitung nilai *MSE* menggunakan data latih dan data uji sebagai input.  
 
-Tabel 5. Hasil dataframe setelah dilakukan perhitungan nilai mse untuk setiap algoritma pada data latih dan data uji. 
+Tabel 5. Hasil dataframe setelah dilakukan perhitungan nilai *MSE* untuk setiap algoritma pada data latih dan data uji. 
 
-Tabel 5 menunjukan perbadingan ketiga algoritma dalam menghitung mse pada data latih dan data uji. Inilah yang dijadikan bahan untuk proses mengetahui model yang mendekati y_aktual terbaik.
+Tabel 5 menunjukan perbadingan ketiga algoritma dalam menghitung *MSE* pada data latih dan data uji. Inilah yang dijadikan bahan untuk proses mengetahui model yang mendekati y_aktual terbaik.
 |Nama Algoritma|train|test| 
 |---|---|---|
 |KNN|16232.637486|18914.353625|18914.353625|
@@ -341,3 +341,17 @@ Dengan demikian, goals untuk mengetahui fitur yang berpengaruh terhadap harga ju
 [3]	E. Surya Negara, J. Jenderal Ahmad Yani, K. I. Seberang Ulu, and S. Selatan, “Sulaiman et al, Komparasi Algoritma K-Nearest Neoghbors dan Random Forest …….. 337 Komparasi Algoritma K-Nearest Neighbors dan Random Forest Pada Prediksi Harga Mobil Bekas,” 2023. Tersedia [tautan](https://jurnal.polsri.ac.id/index.php/jupiter/article/view/5435/2571).
 
 [4]	L. Putra Nasyuli, I. Lubis, A. Marwan Elhanafi, corresponding author, and F. Teknik Dan Komputer, “Penerapan Model Machine Learning Algoritma Gradient Boosting dan Linear Regression Melakukan Prediksi Harga Kendaraan Bekas Application Of Machine Learning Models and Gradient Boosting Algorithms Doing Linear Regression Vehicle Price Prediction Used,” 2023. Tersedia [tautan](https://jurnal.unity-academy.sch.id/index.php/jirsi/article/view/56/44).
+
+[5] 
+
+[6] Scikit-learn Documentation. Tersedia: [tautan](https://www.kaggle.com/datasets/CooperUnion/cardataset). Diakses pada: Februari 2024.
+
+[7]
+
+[8]
+
+[9]
+
+[10]
+
+[11] 
