@@ -234,7 +234,7 @@ Kekurangan *KNN*:
 * Prediksi dapat menjadi lambat karena perhitungan jarak untuk data latih yang besar.
 * Hasil sangat tergantung pada pemilihan nilai K dan fungsi jarak yang digunakan.
   
-Kali ini, modelling dengan Algoritma *KNN* akan menggunakan bantuan hyperparameter tuning  untuk menemukan kombinasi nilai yang optimal terhadap parameter model tersebut agar nantinya dapa meningkatkan performa model. Proses awal penggunaan algortima ini dilakukan pemanggilan metode KNeighborsRegressor dari library scikit-learn [[(8)]](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html). Kemudian parameter yang digunakan di algoritma ini, yaitu *n_neigbors* akan di sesuaikan berdasarkan hyperparameter tunning. Output yang muncul dari proses tersebut adalah skor *RandomSearch* untuk *KNN* sebesar -23871881.20319546 dan parameter n_neigbors dengan nilai 10. Kemudian, masuk ke proses pelatihan model *KNN* dengan parameter n_neigbors menggunakan hasil dari tahapan sebelumnya. Model ditrain oleh fungsi fit dengan matrix evaluasi yang digunakan adalah *Mean Squared Error atau MSE*. 
+Kali ini, modelling dengan Algoritma *KNN* akan menggunakan bantuan hyperparameter tuning  untuk menemukan kombinasi nilai yang optimal terhadap parameter model tersebut agar nantinya dapa meningkatkan performa model. Proses awal penggunaan algortima ini dilakukan pemanggilan metode KNeighborsRegressor dari library scikit-learn [[8]](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html). Kemudian parameter yang digunakan di algoritma ini, yaitu *n_neigbors* akan di sesuaikan berdasarkan hyperparameter tunning. Output yang muncul dari proses tersebut adalah skor *RandomSearch* untuk *KNN* sebesar -23871881.20319546 dan parameter n_neigbors dengan nilai 10. Kemudian, masuk ke proses pelatihan model *KNN* dengan parameter n_neigbors menggunakan hasil dari tahapan sebelumnya. Model ditrain oleh fungsi fit dengan matrix evaluasi yang digunakan adalah *Mean Squared Error atau MSE*. 
 ### Model Devlopment Menggunakan Algoritma *Random Forest*
 *Random forest* merupakan salah satu model machine learning yang termasuk ke dalam kategori ensemble (group) learning. Apa itu model ensemble? Sederhananya, ia merupakan model prediksi yang terdiri dari beberapa model dan bekerja secara bersama-sama. *Random Forest* bekerja dengan membangun sejumlah pohon keputusan (decision trees) dari data latih dengan melakukan sampling acak baik pada data maupun fiturnya. Setiap pohon akan tumbuh secara maksimal tanpa pruning. Kemudian, hasil prediksi dari masing-masing pohon ini akan digabungkan dengan rata-rata (average) atau voting untuk mendapatkan estimasi model akhir.
 
@@ -342,16 +342,17 @@ Dengan demikian, goals untuk mengetahui fitur yang berpengaruh terhadap harga ju
 
 [4]	L. Putra Nasyuli, I. Lubis, A. Marwan Elhanafi, corresponding author, and F. Teknik Dan Komputer, “Penerapan Model Machine Learning Algoritma Gradient Boosting dan Linear Regression Melakukan Prediksi Harga Kendaraan Bekas Application Of Machine Learning Models and Gradient Boosting Algorithms Doing Linear Regression Vehicle Price Prediction Used,” 2023. Tersedia [tautan](https://jurnal.unity-academy.sch.id/index.php/jirsi/article/view/56/44).
 
-[5] 
+[5] COOPERUNION, Jeffrey Shih, et al. "Car Features and MSRP". Kaggle. 2017. Tersedia: [tautan](https://www.kaggle.com/datasets/CooperUnion/cardataset). Diakses pada: Februari 2024.
 
-[6] Scikit-learn Documentation. Tersedia: [tautan](https://www.kaggle.com/datasets/CooperUnion/cardataset). Diakses pada: Februari 2024.
+[6] Scikit-learn Documentation. "GridSearchCV". Tersedia: [tautan](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html). Diakses pada: Februari 2024.
 
-[7]
+[7] Scikit-learn Documentation. "KNeighborsClassifier". Tersedia: [tautan](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html). Diakses pada: Februari 2024.
 
-[8]
+[8] Scikit-learn Documentation. "KNeighborsRegressor". Tersedia: [tautan](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html). Diakses pada: Februari 2024.
 
-[9]
+[9] Scikit-learn Documentation. "RandomForestRegressor". Tersedia: [tautan](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html). Diakses pada: Februari 2024.
 
-[10]
+[10] Scikit-learn Documentation. "AdaBoostRegressor". Tersedia: [tautan](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostRegressor.html). Diakses pada: Februari 2024.
 
-[11] 
+[11] Scikit-learn Documentation. "mean_squared_error". Tersedia: [tautan](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html). Diakses pada: Februari 2024.
+
