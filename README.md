@@ -76,7 +76,7 @@ Dengan menggunakan bantuan metode isna() yang dijumlahkan, hasil terlihat bahwa 
 
   Gambar 1. Visualisasi missing value dengan bantuan library seaborn.
 
-Berdasarkan Gambar 1, terlihat jelas pada bintik-bintik yang linear dengan nama-kolom mengandung missing value. 
+  Berdasarkan Gambar 1, terlihat jelas pada bintik-bintik yang linear dengan nama-kolom mengandung missing value. 
 * Checking the duplicate rows
 Tahap ini bertujuan untuk melihat apakah ada baris data yang identik atau duplikat dalam dataset? Duplikasi data bisa menjadi masalah karena mereka dapat mempengaruhi hasil analisis statistik dengan memberikan bobot tambahan pada observasi yang sama. Mengidentifikasi dan menghapus duplikasi dapat membantu
 memastikan keakuratan analisis data dan mencegah distorsi dalam hasil.
@@ -91,7 +91,7 @@ Dengan menggunakan library seaborn dengan methodnya boxplot(), parameter di dala
 
   Gambar 2. Salah satu contoh visualisasi keberadaan outlier dari kolom Engine HP.
    
-Berdasarskan visualisasi pada gambar 2, terlihat bahwa terdapat beberapa fitur numerik yang mengandung outlier. Nantinya, Outlier-outlier tersebut akan dihapus menggunakan teknik atau metode IQR. 
+  Berdasarskan visualisasi pada gambar 2, terlihat bahwa terdapat beberapa fitur numerik yang mengandung outlier. Nantinya, Outlier-outlier tersebut akan dihapus menggunakan teknik atau metode IQR. 
 
 ### Data Cleaning
 Data Cleaning adalah proses pembersihan data yang bertujuan untuk memastikan kualitas dan konsistensi data sebelum dilakukan analisis lebih lanjut. Tujuan utamanya adalah untuk menghilangkan masalah atau gangguan dalam dataset yang dapat memengaruhi hasil analisis statistik atau pembangunan model. Pada tahap ini akan dilakukan beberapa proses seperti Renaming the columns, Dropping the missing or null values, Dropping the duplicated rows, dan Handling the outliers. Berikut implemetasi dan hasil yang didapat:
