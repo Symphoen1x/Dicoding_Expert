@@ -31,19 +31,19 @@ Untuk kedua problem statemnets diatas, solusi yang akan digunakan sebagai beriku
 Prediksi harga adalah tujuan yang ingin dicapai dan harga merupakan variabel kontinu. Dalam predictive analytics, untuk data yang bersifat variabel kontinu artinya merupakan permasalahan regresi. Oleh karena itu, metodologi pada proyek ini adalah: membangun model regresi dengan harga jual mobil sebagai variabel target(dependent variable) dan fitur-fitur utama mobil sebagai variabel prediktor(independent variabel).
 
 ## Data Understanding
-Proyek ini menggunakan dataset yang memiliki 11.913 baris dan 16 kolom. Fitur-fitur di dalamnya terdiri dari merek, model, tahun produksi, bahan bakar, dan fitur lain. Dataset ini digunakan untuk memprediksi harga jual mobil yang berada di USA dari tahun 1990-2018. Cara pengambilan dataset ini berdasarkan sumber pengelola menggunakan teknik Scraped dari Emunds dan Twitter[[5]](https://www.kaggle.com/datasets/CooperUnion/cardataset).
+Proyek ini menggunakan dataset yang memiliki 11.913 baris dan 16 kolom. Fitur-fitur di dalamnya terdiri dari merek, model, tahun produksi, bahan bakar, dan fitur lain. Dataset ini digunakan untuk memprediksi harga jual mobil yang berada di USA dari tahun 1990-2018. Cara pengambilan dataset ini berdasarkan sumber pengelola menggunakan teknik Scraped dari Emunds dan Twitter[[5](https://www.kaggle.com/datasets/CooperUnion/cardataset).
 ### Description variable
 Variabel - variabel yang ada dalam dataset sebagai berikut:
 * Make: Merek/manufaktur mobil (BMW, Acura, linkoln, dll). Variabel ini berjumlah 48 nilai unik dan bertipe data kategorikal.
-*	Model: Model spesifik dari mobil (1 Series M, 1 Series, dll). Variabel ini memiliki nilai unik yang banyak sekali dengan jumlah 915 unit. Variabel ini bertipe data kategorikal.
-*	Year: Tahun produksi mobil. Year/tahun produksi adalah Variabel dengan jumlah nilai unik sebanyak 28 dan variabel dengan tipe data numerik.
-*	Engine Fuel Type: Jenis bahan bakar mesin (gasoline, diesel, etc). Variabel ini berjumlah 10 nilai unik dan bertipe data kategorikal.
-*	Engine HP: Tenaga kuda mesin dalam satuan horsepower. Variabel ini memiliki nilai unik yang lumayan ybanyak dengan jumlah 356 unit. Variabel ini bertipe data numerik.
-*	Engine Cylinders: Jumlah silinder mesin. Engine Cyliners/jumlah silinder pada mesin adalah Variabel dengan jumlah nilai unik sebanyak 9 dan variabel dengan tipe data numerik.
-*	Transmission: Tipe transmisi (manual, auto, dll). Variabel ini berjumlah 5 nilai unik dan bertipe data kategorikal.
-* Type	Driven_Wheels:Roda penggerak (rear wheel drive, all wheel drive	, dll). Driven Wheels atau roda penggerak adalah Variabel dengan jumlah nilai unik sebanyak 4 dan variabel dengan tipe data numerik.
-*	Number of Doors: Jumlah pintu mobil. Variabel ini berjumlah 3 nilai unik dan bertipe data numerik.
-*	Market Category: Kategori pasar mobil (Factory Tuner,Luxury,High-Performance, Luxury, dll). Variabel ini memiliki nilai unik yang cukup banyak dengan jumlah 71 unit. Variabel ini bertipe data kategorikal.
+* Model: Model spesifik dari mobil (1 Series M, 1 Series, dll). Variabel ini memiliki nilai unik yang banyak sekali dengan jumlah 915 unit. Variabel ini bertipe data kategorikal.
+* Year: Tahun produksi mobil. Year/tahun produksi adalah Variabel dengan jumlah nilai unik sebanyak 28 dan variabel dengan tipe data numerik.
+* Engine Fuel Type: Jenis bahan bakar mesin (gasoline, diesel, etc). Variabel ini berjumlah 10 nilai unik dan bertipe data kategorikal.
+* Engine HP: Tenaga kuda mesin dalam satuan horsepower. Variabel ini memiliki nilai unik yang lumayan ybanyak dengan jumlah 356 unit. Variabel ini bertipe data numerik.
+* Engine Cylinders: Jumlah silinder mesin. Engine Cyliners/jumlah silinder pada mesin adalah Variabel dengan jumlah nilai unik sebanyak 9 dan variabel dengan tipe data numerik.
+* Transmission: Tipe transmisi (manual, auto, dll). Variabel ini berjumlah 5 nilai unik dan bertipe data kategorikal.
+* Type  Driven_Wheels:Roda penggerak (rear wheel drive, all wheel drive , dll). Driven Wheels atau roda penggerak adalah Variabel dengan jumlah nilai unik sebanyak 4 dan variabel dengan tipe data numerik.
+* Number of Doors: Jumlah pintu mobil. Variabel ini berjumlah 3 nilai unik dan bertipe data numerik.
+* Market Category: Kategori pasar mobil (Factory Tuner,Luxury,High-Performance, Luxury, dll). Variabel ini memiliki nilai unik yang cukup banyak dengan jumlah 71 unit. Variabel ini bertipe data kategorikal.
 * Vehicle Size: Ukuran mobil (Compact, midsize, dll). Vehicle Size/ukuran mobil adalah Variabel dengan jumlah nilai unik sebanyak 3 dan variabel dengan tipe data kategorikal.
 * Vehicle Style: Gaya/model mobil (Coupe, Convertible, dll). Variabel ini berjumlah 16 nilai unik dan bertipe data kategorikal.
 * highway MPG: Jarak tempuh per galon di jalan tol. Variabel ini berjumlah 59 nilai unik dan bertipe data numerik.
@@ -155,7 +155,7 @@ Cara memvvisualisasikan fitur ini secara multivariate dapat dilakukan dengan ban
 Untuk mengamati hubungan antara fitur numerik, kita akan menggunakan fungsi pairplot(). Kita juga akan mengobservasi korelasi antara fitur numerik dengan fitur target menggunakan fungsi corr(). Berikut adalah gambar dari kedua cara tersebut.
 ![real multivariate](https://github.com/Symphoen1x/Dicoding_Expert/assets/116389179/2bbc1a65-66b8-4f1f-9f7a-0876f82a8729)
 
-  Gambar 8. Visualisasi multivariate pada numerical features dengan fungsi pairplot.
+  Gambar 8. Visualisasi multivariate pada numerical features dengan fungsi pair plot.
 
   Berdasarkan gambar 8, fungsi pairplot memberikan gambaran kumpulan fitur/multivariate fitur yang saling berkorelasi dan memperlihatkan distribusi data numerik. Fitur
 ![cmaps](https://github.com/Symphoen1x/Dicoding_Expert/assets/116389179/2eb08778-9741-4a54-a677-5696a33e70df)
@@ -186,7 +186,7 @@ Tabel 2. Hasil dari proses Encoding Feature Category.
 |4|230\.0|6\.0|28|18|34500|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|
 
 ### Reduksi Dimensi dengan PCA
-Teknik reduksi (pengurangan) dimensi adalah prosedur yang mengurangi jumlah fitur dengan tetap mempertahankan informasi pada data. Teknik pengurangan dimensi yang paling populer adalah Principal Component Analysis atau disingkat menjadi PCA. Ia adalah teknik untuk mereduksi dimensi, mengekstraksi fitur, dan mentransformasi data dari “n-dimensional space” ke dalam sistem berkoordinat baru dengan dimensi m, di mana m lebih kecil dari n.  Hal ini sangat penting karena jika dataset memiliki banyak fitur yang mempersulit analisis, hal tersebut dapat menyebabkan overfitting atau masalah lain.
+Teknik reduksi (pengurangan) dimensi adalah prosedur yang mengurangi jumlah fitur dengan tetap mempertahankan informasi pada data. Teknik pengurangan dimensi yang paling populer adalah Principal Component Analysis atau disingkat menjadi PCA. Ia adalah teknik untuk mereduksi dimensi, mengekstraksi fitur, dan mentransformasi data dari "n-dimensional space" ke dalam sistem berkoordinat baru dengan dimensi m, di mana m lebih kecil dari n.  Hal ini sangat penting karena jika dataset memiliki banyak fitur yang mempersulit analisis, hal tersebut dapat menyebabkan overfitting atau masalah lain.
 
 PCA bekerja menggunakan metode aljabar linier. Teknik ini mengasumsikan bahwa sekumpulan data pada arah dengan varians terbesar merupakan yang paling penting (utama). PCA umumnya digunakan ketika fitur dalam data memiliki korelasi yang tinggi. Korelasi tinggi ini menunjukkan data yang berulang atau redundant.
 
@@ -229,10 +229,10 @@ Tabel 4. Dataframe hasil akhir setelah proses standarisasi pada fitur numerik.
 
 Berdasarkan output diatas, terlihat benar bukan bahwa standarisasi mengubah nilai mean menjadi 0 dan nilai standar devisiasi menjadi 1. Sekitar 68% dari nilai akan berada di antara -1 dan 1.
   
-## Model Devlopment
+## Model Development
 Proses kali ini menunjukan penggunaan machine learning dengan beberapa Algoritma yang akan digunakan. Algoritma yang akan digunakan pada proses Model Devploment kali ini ada tiga, yaitu K-Nearest Neighbor, *Random Forest*, dan *Boosting Algorithm*. Sebelum itu, pembuatan DataFrame yang berisi ketiga algoritma diatas untuk membandingkan hasil prediksi terbaik perlu dibuat. Tidak lupa untuk menggunakan hyperparameter tuning *GridSearch* dari library scikit-learn dalam proses pelatihan model dengan kaetiga algoritma tersebut. Tujuanya untuk mengingkatkan performa model yang dilatih [[6]](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html). Parameter ini nantinya dibutuhkan dalam mencari parameter terbaik dari masing masing algoritma yang dilakukan pelatihan.
 ### Model Devlopment Menggunakan Algoritma *K-Nearest Neighbor atau KNN*
-*KNN* adalah algoritma yang relatif sederhana dibandingkan dengan algoritma lain [[7]](https://www.ibm.com/topics/knn#:~:text=Next%20steps-,K-Nearest%20Neighbors%20Algorithm,of%20an%20individual%20data%20point). Algoritma ini menggunakan ‘kesamaan fitur’ untuk memprediksi nilai dari setiap data yang baru. Dengan kata lain, setiap data baru diberi nilai berdasarkan seberapa mirip titik tersebut dalam set pelatihan. *KNN* ini cocok digunakan untuk kasus regresi dan klasifikasi dalam machine learning.
+*KNN* adalah algoritma yang relatif sederhana dibandingkan dengan algoritma lain [[7]](https://www.ibm.com/topics/knn#:~:text=Next%20steps-,K-Nearest%20Neighbors%20Algorithm,of%20an%20individual%20data%20point). Algoritma ini menggunakan 'kesamaan fitur' untuk memprediksi nilai dari setiap data yang baru. Dengan kata lain, setiap data baru diberi nilai berdasarkan seberapa mirip titik tersebut dalam set pelatihan. *KNN* ini cocok digunakan untuk kasus regresi dan klasifikasi dalam machine learning.
 Algoritma *K-Nearest Neighbor (KNN)* bekerja dengan cara mencari K tetangga terdekat data input baru berdasarkan jaraknya, lalu memprediksi output berdasarkan rata-rata output tetangga tersebut.
 
 Kelebihan *KNN*:
@@ -343,7 +343,7 @@ Tabel 6. Hasil prediksi nilai target berdasarkan ketiga model algoritma(*KNN*, *
 Tabel diatas dapat digunakan
 ### Calculates the difference between the predicted value and the y_true value
 Tujuan dari perhitungan rata-rata selisih antara nilai sebenarnya dan nilai prediksi dari ketiga model adalah untuk membandingkan performa relatif dari ketiga model tersebut. Ketiga model tersebut memiliki nilai absolut dari rata-rata selisih antara nilai aktual (y_true). Nilai prediksi yang terkecil mengindikasikan bahwa model cenderung memiliki kinerja yang lebih baik. Dalam konteks prediksi, nilai selisih yang lebih kecil menunjukkan bahwa prediksi model lebih mendekati nilai aktual. Hasil yang muncul tetap sama bahwa model dengan *Random Forest* lah yang tetap menjadi model terbaik dengan nilai rata-rata selisih terkecil sebanyak 2449.79, disusul oleh Model *KNN* sebanyak 3544.4, dan terakhir oleh *Boosting* sebanyak 9203.43.
-### Accuracy Model with difference algorithm
+### Accuracy Model with a different algorithm
 Metode [[12]](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.accuracy_score.html) dari library skcit-learn dapat membantu dalam pemilihan model terbaik untuk digunakan dalam suatu tugas atau masalah tertentu seperti regresi. Model dengan skor yang lebih tinggi cenderung memberikan prediksi yang lebih baik atau hasil yang lebih akurat.
 
 Berdasarkan hasil perbadingan ketiga model, terlihat kembali bahwa pada bagian akurasi model menggunakan algoritma *Random Forest* menghasilkan skor yang cukup baik, yaitu 0.9313177979043304. Skor model ini menjadi yang terbaik diantara kedua model lain.
@@ -351,13 +351,13 @@ Berdasarkan hasil perbadingan ketiga model, terlihat kembali bahwa pada bagian a
 Berdasarkan analisis yang telah dilakukan pada proyek prediksi harga jual movil ini, dapat disimpulkan bahwa telah dilakukan pemahaman mendalam mengenai domain proyek meliputi latar belakang, tujuan, kebutuhan, dan referensi relevan. Data, fitur, dan variabel yang digunakan telah dipahami dan diolah dengan baik melalui encoding, PCA, pembagian dataset, dan standarisasi. Proses permodelan juga telah dilakukan dengan membandingkan 3 algoritma regresi yaitu *KNN*, *Random Forest*, dan *Boosting*, serta penggunaan hyperparameter tunning dengan GridSearch dimana *Random Forest* terpilih sebagai model terbaik untuk prediksi harga jual mobil pada proyek ini.
 Dengan demikian, goals untuk mengetahui fitur yang berpengaruh terhadap harga jual serta membuat model prediksi harga jual mobil akurat berdasarkan fitur tersebut juga telah berhasil dicapai melalui analisis yang komprehensif dalam proyek ini. Jadi prediksi harga mobil telah sesuai harapan dan dapat digunakan menjawab problem bisnis yang ada. Model tersebut diharapkan dapat membantu produsen dalam menentukan harga yang kompetitif di pasar dan dealer mobil dalam merumuskan strategi penetapan harga yang optimal.
 ## Reference
-[1]	B. Kriswantara, K. Kurniawati, and H. F. Pardede, “Prediksi Harga Mobil Bekas dengan Machine Learning,” Syntax Literate ; Jurnal Ilmiah Indonesia, vol. 6, no. 5, p. 2100, May 2021, doi: 10.36418/syntax-literate.v6i5.2716. Tersedia [tautan](https://jurnal.syntaxliterate.co.id/index.php/syntax-literate/article/view/2716).
+[1] B. Kriswantara, K. Kurniawati, and H. F. Pardede, "Prediksi Harga Mobil Bekas dengan Machine Learning," Syntax Literate ; Jurnal Ilmiah Indonesia, vol. 6, no. 5, p. 2100, May 2021, doi: 10.36418/syntax-literate.v6i5.2716. Tersedia [tautan](https://jurnal.syntaxliterate.co.id/index.php/syntax-literate/article/view/2716).
 
-[2]	B. Kriswantara and R. Sadikin, “Used Car Price Prediction with Random Forest Regressor Model,” Journal of Information Systems, Informatics and Computing Issue Period, vol. 6, no. 1, pp. 40–49, 2022, doi: 10.52362/jisicom.v6i1.752. Tersedia [tautan](https://journal.stmikjayakarta.ac.id/index.php/jisicom/article/view/752/506).
+[2] B. Kriswantara and R. Sadikin, "Used Car Price Prediction with Random Forest Regressor Model," Journal of Information Systems, Informatics and Computing Issue Period, vol. 6, no. 1, pp. 40–49, 2022, doi: 10.52362/jisicom.v6i1.752. Tersedia [tautan](https://journal.stmikjayakarta.ac.id/index.php/jisicom/article/view/752/506).
 
-[3]	E. Surya Negara, J. Jenderal Ahmad Yani, K. I. Seberang Ulu, and S. Selatan, “Sulaiman et al, Komparasi Algoritma K-Nearest Neoghbors dan Random Forest …….. 337 Komparasi Algoritma K-Nearest Neighbors dan Random Forest Pada Prediksi Harga Mobil Bekas,” 2023. Tersedia [tautan](https://jurnal.polsri.ac.id/index.php/jupiter/article/view/5435/2571).
+[3] E. Surya Negara, J. Jenderal Ahmad Yani, K. I. Seberang Ulu, and S. Selatan, "Sulaiman et al, Komparasi Algoritma K-Nearest Neoghbors dan Random Forest …….. 337 Komparasi Algoritma K-Nearest Neighbors dan Random Forest Pada Prediksi Harga Mobil Bekas," 2023. Tersedia [tautan](https://jurnal.polsri.ac.id/index.php/jupiter/article/view/5435/2571).
 
-[4]	L. Putra Nasyuli, I. Lubis, A. Marwan Elhanafi, corresponding author, and F. Teknik Dan Komputer, “Penerapan Model Machine Learning Algoritma Gradient Boosting dan Linear Regression Melakukan Prediksi Harga Kendaraan Bekas Application Of Machine Learning Models and Gradient Boosting Algorithms Doing Linear Regression Vehicle Price Prediction Used,” 2023. Tersedia [tautan](https://jurnal.unity-academy.sch.id/index.php/jirsi/article/view/56/44).
+[4] L. Putra Nasyuli, I. Lubis, A. Marwan Elhanafi, corresponding author, and F. Teknik Dan Komputer, "Penerapan Model Machine Learning Algoritma Gradient Boosting dan Linear Regression Melakukan Prediksi Harga Kendaraan Bekas Application Of Machine Learning Models and Gradient Boosting Algorithms Doing Linear Regression Vehicle Price Prediction Used," 2023. Tersedia [tautan](https://jurnal.unity-academy.sch.id/index.php/jirsi/article/view/56/44).
 
 [5] COOPERUNION, Jeffrey Shih, et al. "Car Features and MSRP". Kaggle. 2017. Tersedia: [tautan](https://www.kaggle.com/datasets/CooperUnion/cardataset). Diakses pada: Februari 2024.
 
