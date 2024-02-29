@@ -114,14 +114,10 @@ Number of Doors sebanyak 6 sel, dan Market Category sebanyak 3742 sel berhasil d
 * Dropping the duplicated rows
 Terlihat di tahap sebelumnya bahwa terdapat data yang terduplikasi. Kali ini, proses lanjutan akan dilakukan untuk mengurangi gangguan yang ada pada data karena jumlahnya yang besar. Dengan menggunakan metode drop_duplicates() dari library pandas ke dataset ini proses menghapus duplikasi data dalam baris berhasil dilakukan. Bukti menunjukkan bahwa jumlah data dalam baris berkurang dari yang awalnya 11914 menjadi 7735.
 *  Handling the outliers
-Berdasarkan visualisasi keberadaan outlier di tahap sebelumnya, proses ini penting untuk dilakukan agar akurasi model yang dilatih tidak terpengaruh secara signifikan. Teknik yang akan digunakan seperti yang sudah disinggung sebelumnya, yaitu IQR. Teknik ini mengidentifikasi outlier yang ada dibatas atas Q3 dan dibatas bawah atau Q1. Lalu, nilai-nilai yang ada di dalam batas akan digunakan sementara yang di luar kedua batas atau outlier akan dihapus. 
-
-  Formula yang lebih jelas untuk IQR adalah$Batas\ bawah = Q1 - 1.5 * IQR$ dan $Batas\ atas = Q3 + 1.5 * IQR$.
-![final cleaning](https://github.com/Symphoen1x/Dicoding_Expert/assets/116389179/b6a4ff93-704e-40b0-bc8c-1c5d4dc2991b)
-  
-  Gambar 4. Hasil final setelah proses cleaning data.
-
-  Berdasarkan Gambar 4, hasil dapat terlihat dari pengurangan jumlah data dalam baris yang sebelumnya berjumlah 7735 menjadi 5622 dalam bentuk tabel sederhana dengan bantuan metode info().
+Berdasarkan visualisasi keberadaan outlier di tahap sebelumnya, proses ini penting untuk dilakukan agar akurasi model yang dilatih tidak terpengaruh secara signifikan. Teknik yang akan digunakan seperti yang sudah disinggung sebelumnya, yaitu IQR. Teknik ini mengidentifikasi outlier yang ada dibatas atas Q3 dan dibatas bawah atau Q1. Lalu, nilai-nilai yang ada di dalam batas akan digunakan sementara yang di luar kedua batas atau outlier akan dihapus.
+  Formula yang lebih jelas untuk IQR sebagai berikut:
+$Batas\ bawah = Q1 - 1.5 * IQR$ dan $Batas\ atas = Q3 + 1.5 * IQR$.
+  Berdasarkan proses perhitungan dengan rumus di atas untuk setiap data, hasil yang terlihat adalah pengurangan jumlah data dalam baris yang sebelumnya berjumlah 7735 menjadi 5622 dalam bentuk tabel sederhana dengan bantuan metode info().
 
 ### Exploratory Data Analysis -Univariate Analysis
 Kenapa Univariate Analysis? Jadi tujuan melakukan analysis ini untuk memahami karakteristik dari satu variabel tunggal dalam dataset tanpa ada memperhatikan hubungan variabel lain. Tahap kali ini, Univariate analysis dilakukan dengan memisah categorical feature dengan numerical features.
@@ -146,14 +142,14 @@ Pada Numerical Features, proses pemisahan menggunakan metode select_dtypes denga
 ### Exploratory Data Analysis -Multivariate Analysis
 Multivariate Analysis adalah analisis yang memperlihatkan korelasi atau hubungan dua atau lebih variabel. Analysis ini bertujuan untuk memahami hubungan antara dua atau lebih variabel dalam sebuah dataset. Seperti analysis sebelumnya, kali ini juga melakukan pemisahan antara numerical feature dan categorical feature. Nantinya, masing masing feature tersebut akan dianalisis terhadap variabel target, yaitu Harga_Jual.
 * Categorical Features
-Cara memvvisualisasikan fitur ini secara multivariate dapat dilakukan dengan bantuan metode histogram dari library plotly. Bedanya dengan analisis univariate adalah kali ini kita memasukkan dua parameter yang diperlukan, yaitu x yang berisi beberapa variabel independent dan y yang berisi variabel dependent atau target (Harga_Jual). Berikut ini adalah salah satu gambar yang dapat dijadikan sampel output.
+Cara memvisualisasikan fitur ini secara multivariate dapat dilakukan dengan bantuan metode histogram dari library plotly. Bedanya dengan analisis univariate adalah proses ini memasukkan dua parameter yang diperlukan, yaitu x yang berisi beberapa variabel independent dan y yang berisi variabel dependent atau target (Harga_Jual). Berikut ini adalah salah satu gambar yang dapat dijadikan sampel output.
 ![newplot (2)](https://github.com/Symphoen1x/Dicoding_Expert/assets/116389179/926528e0-3468-4692-8b1a-a638ce5c573e)
 
   Gambar 7. Visualisasi multivariate Analisis pada kolom Veichle Size.
   
   Berdasarkan Gambar 7, fitur veichle Size terlihat bahwa pengaruh terhadap terhadap variabel target atau Harga_Jual bervariasi. Misalkan, pada bagian "Midsize" terlihat memiliki korelasi tertinggi dengan variabel target (Harga_Jual), sementara yang lain relatif sama.
 * Numerical Features
-Untuk mengamati hubungan antara fitur numerik, kita akan menggunakan fungsi pairplot(). Kita juga akan mengobservasi korelasi antara fitur numerik dengan fitur target menggunakan fungsi corr(). Berikut adalah gambar dari kedua cara tersebut.
+Untuk mengamati hubungan antara fitur numerik, fungsi pairplot() akan digunakan. Proses mengobservasi hubungan antara fitur numerik dengan fitur target menggunakan fungsi corr(). Berikut adalah gambar dari kedua cara tersebut.
 ![real multivariate](https://github.com/Symphoen1x/Dicoding_Expert/assets/116389179/2bbc1a65-66b8-4f1f-9f7a-0876f82a8729)
 
   Gambar 8. Visualisasi multivariate pada numerical features dengan fungsi pairplot.
@@ -212,8 +208,8 @@ Tabel 3. Dataframe hasil akhri dari proses PCA
 |2|300\.0|6\.0|36350|0|0|0|1|0|0|0|0|0|0|0|0|0|0|0|0|0|1.072056|
 
 ### Train-Test-Split
-Pada awalnya, proses scaling pada seluruh dataset membuat model memiliki informasi mengenai distribusi pada data uji. Informasi tentang data uji (yang seharusnya tidak dilihat oleh model) turut diikutsertakan dalam proses transformasi data latih. Oleh karena itu, kita akan melakukan proses scaling secara terpisah antara data latih dan data uji. Pada tahap kali ini proses pembagian data menjadi data latih dan data uji dengan proporsi 80:20. Hasil yang muncul dari pembagian datadi atass, train data sejumlah 4497 dan test data sejumlah 1125 dari total 5622 sampel data. Proses ini dibantu oleh library sklearn dengan modul train_test_split.
-##StStandardisasii
+Pada awalnya, proses scaling pada seluruh dataset membuat model memiliki informasi mengenai distribusi pada data uji. Informasi tentang data uji (yang seharusnya tidak dilihat oleh model) turut diikutsertakan dalam proses transformasi data latih. Oleh karena itu, proses scaling akan dilakukan secara terpisah antara data latih dan data uji. Pada tahap kali ini proses pembagian data menjadi data latih dan data uji dengan proporsi 80:20. Hasil yang muncul dari pembagian datadi atass, train data sejumlah 4497 dan test data sejumlah 1125 dari total 5622 sampel data. Proses ini dibantu oleh library sklearn dengan modul train_test_split.
+### Standardisasi
 Standardisasi adalah teknik transformasi yang palingumunm digunakan dalam tahap persiapan pemodelan. Teknik ini digunakan untuk transformasi pada feature numerik. StandardScaler melakukan proses standardisasi fitur dengan mengurangkan mean (nilai rata-rata) kemudian membaginya dengan standar deviasi untuk menggeser distribusi. StandardScaler menghasilkan distribusi dengan standar deviasi sama dengan 1 dan mean sama dengan 0. Sekitar 68% dari nilai akan berada di antara -1 dan 1.
 
 Untuk menghindari kebocoran informasi pada data uji, Tabel 4 menerapkan hasil teknikdi atass dilakukan melalui pada data latih. Kemudian, pada tahap evaluasi, standardisasi dilakukan pada data uji.
@@ -231,9 +227,9 @@ Tabel 4. Dataframe hasil akhir setelah proses standardisasi pada fitur numerik.
 Berdasarkan output di atas, terlihat benar bukan bahwa standardisasi mengubah nilai mean menjadi 0 dan nilai standar devisiasi menjadi 1. Sekitar 68% dari nilai akan berada di antara -1 dan 1.
   
 ## Model Devlopment
-Proses kali ini menunjukkan penggunaan machine learning dengan beberapa Algoritma yang akan digunakan. Algoritma yang akan digunakan pada proses Model Devploment kali ini ada tiga, yaitu K-Nearest Neighbor, *Random Forest*, dan *Boosting Algorithm*. Sebelum itu, pembuatan DataFrame yang berisi ketiga algoritma di atas untuk membandingkan hasil prediksi terbaik perlu dibuat. Tidak lupa untuk menggunakan hyperparameter tuning *GridSearch* dari library scikit-learn dalam proses pelatihan model dengan kaetiga algoritma tersebut. Tujuanya untuk mengingkatkan performa model yang dilatih [[6]](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html). Parameter ini nantinya dibutuhkan dalam mencari parameter terbaik dari masing masing algoritma yang dilakukan pelatihan.
+Proses kali ini menunjukkan penggunaan machine learning dengan beberapa Algoritma yang akan digunakan. Algoritma yang akan digunakan pada proses Model Devploment kali ini ada tiga, yaitu K-Nearest Neighbor, *Random Forest*, dan *Boosting Algorithm*. Sebelum itu, pembuatan DataFrame yang berisi ketiga algoritma di atas untuk membandingkan hasil prediksi terbaik perlu dibuat. Tidak lupa untuk menggunakan hyperparameter tuning *GridSearch* dari library scikit-learn dalam proses pelatihan model dengan kaetiga algoritma tersebut. Tujuanya untuk mengingkatkan performa model yang dilatih. Parameter ini nantinya dibutuhkan dalam mencari parameter terbaik dari masing masing algoritma yang dilakukan pelatihan.
 ### Model Devlopment Menggunakan Algoritma *K-Nearest Neighbor atau KNN*
-*KNN* adalah algoritma yang relatif sederhana dibandingkan dengan algoritma lain [[7]](https://www.ibm.com/topics/knn#:~:text=Next%20steps-,K-Nearest%20Neighbors%20Algorithm,of%20an%20individual%20data%20point). Algoritma ini menggunakan ‘kesamaan fitur’ untuk memprediksi nilai dari setiap data yang baru. Dengan kata lain, setiap data baru diberi nilai berdasarkan seberapa mirip titik tersebut dalam set pelatihan. *KNN* ini cocok digunakan untuk kasus regresi dan klasifikasi dalam machine learning.
+*KNN* adalah algoritma yang relatif sederhana dibandingkan dengan algoritma lain. Algoritma ini menggunakan ‘kesamaan fitur’ untuk memprediksi nilai dari setiap data yang baru. Dengan kata lain, setiap data baru diberi nilai berdasarkan seberapa mirip titik tersebut dalam set pelatihan. *KNN* ini cocok digunakan untuk kasus regresi dan klasifikasi dalam machine learning.
 Algoritma *K-Nearest Neighbor (KNN)* bekerja dengan cara mencari K tetangga terdekat data input baru berdasarkan jaraknya, lalu memprediksi output berdasarkan rata-rata output tetangga tersebut.
 
 Kelebihan *KNN*:
@@ -247,9 +243,9 @@ Kekurangan *KNN*:
 * Sensitif terhadap noisy data dan outlier.
 * Membutuhkan banyak memori untuk menyimpan seluruh data latih.
 * Prediksi dapat menjadi lambat karena perhitungan jarak untuk data latih yang besar.
-* Hasil sangat tergantung pada pemilihan nilai K dan fungsi jarak yang digunakan.
+* Hasil sangat tergantung pada pemilihan nilai k atau jumlah tetangga terdekat yang dipertimbangkan model dan fungsi jarak yang digunakan.
   
-Kali ini, modelling dengan Algoritma *KNN* akan menggunakan bantuan hyperparameter tuning  untuk menemukan kombinasi nilai yang optimal terhadap parameter model tersebut agar nantinya dapa meningkatkan performa model. Proses awal penggunaan algortima ini dilakukan pemanggilan metode KNeighborsRegressor dari library scikit-learn [[8]](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html). Kemudian, parameter yang digunakan di algoritma ini, yaitu *n_neigbors* akan di sesuaikan berdasarkan hyperparameter tunning. Output yang muncul dari proses tersebut adalah skor *RandomSearch* untuk *KNN* sebesar -23871881.20319546 dan parameter n_neigbors dengan nilai 10. Kemudian, masuk ke proses pelatihan model *KNN* dengan parameter n_neigbors menggunakan hasil dari tahapan sebelumnya. Model ditrain oleh fungsi fit dengan matrix evaluasi yang digunakan adalah *Mean Squared Error atau MSE*.
+Kali ini, modelling dengan Algoritma *KNN* akan menggunakan bantuan hyperparameter tuning  untuk menemukan kombinasi nilai yang optimal terhadap parameter model tersebut agar nantinya dapa meningkatkan performa model. Proses awal penggunaan algortima ini dilakukan pemanggilan metode KNeighborsRegressor dari library scikit-learn. Kemudian, parameter yang digunakan di algoritma ini, yaitu *n_neigbors*. Parameter  n_neighbors menentukan jumlah tetangga terdekat yang akan digunakan oleh model dalam melakukan permodelan. Semakin besar nilai n_neighbors, semakin banyak tetangga yang akan dipertimbangkan dan model cenderung overfitting. Semakin kecil nilai n_neighbors, semakin sedikit tetangga yang dipertimbangkan dan model cenderung underfitting. Parameter ini akan di sesuaikan berdasarkan hyperparameter tunning. Output yang muncul dari proses tersebut adalah skor *RandomSearch* untuk *KNN* sebesar -23871881.20319546 dan parameter n_neigbors dengan nilai 10. Kemudian, masuk ke proses pelatihan model *KNN* dengan parameter n_neigbors menggunakan hasil dari tahapan sebelumnya. Model ditrain oleh fungsi fit dengan matrix evaluasi yang digunakan adalah *Mean Squared Error atau MSE*.
 ### Model Devlopment Menggunakan Algoritma *Random Forest*
 *Random forest* merupakan salah satu model machine learning yang termasuk ke dalam kategori ensemble (group) learning. Apa itu model ensemble? Sederhananya, ia merupakan model prediksi yang terdiri dari beberapa model dan bekerja secara bersama-sama. *Random Forest* bekerja dengan membangun sejumlah pohon keputusan (decision trees) dari data latih dengan melakukan sampling acak baik pada data maupun fiturnya. Setiap pohon akan tumbuh secara maksimal tanpa pruning. Kemudian, hasil prediksi dari masing-masing pohon ini akan digabungkan dengan rata-rata (average) atau voting untuk mendapatkan estimasi model akhir.
 
@@ -268,7 +264,7 @@ Kekurangan *Random Forest*:
 * Sensitif terhadap noise dan outlier jika tidak ditangani dengan baik.
 * Hasilnya mungkin overfit jika ada pohon yang sangat kuat pengaruhnya.
 
-Kembali lagi dalam penyesuaian hyperparameter, model *Random Forest* akan menggunakan teknik hyperparameter tunning *GridSearch* Tahap awal seperti biasa akan dilakukan pemanggilan metode *RandomForestRegressor* dari library Scikit-learn [[9]](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html). Kemudian, parameter yang digunakan di algoritma ini, yaitu *n_estimators*, *max_depth*, *random_state*, dan *n_jobs*. Nilai dari masing-masing parameter diinput berdasarkan hasil hyperparameter tunning sebelumnya. Sebelumnya, apa maksud dari parameter-parameter tersebut:  
+Kembali lagi dalam penyesuaian hyperparameter, model *Random Forest* akan menggunakan teknik hyperparameter tunning *GridSearch* Tahap awal seperti biasa akan dilakukan pemanggilan metode *RandomForestRegressor* dari library Scikit-learn. Kemudian, parameter yang digunakan di algoritma ini, yaitu *n_estimators*, *max_depth*, *random_state*, dan *n_jobs*. Nilai dari masing-masing parameter diinput berdasarkan hasil hyperparameter tunning sebelumnya. Sebelumnya, apa maksud dari parameter-parameter tersebut:  
 * n_estimators untuk menentukan jumlah pohon keputusan yang akan dibangun dalam model ensemble.Makinbesar nilai n_estimators, smakinmpleks model ensemble tersebut.
 * n_jobs untuk  menentukan jumlah pekerjaan paralel yang akan dijalankan saat melatih model. Ketika diatur ke nilai -1, itu berarti menggunakan semua core CPU yang tersedia.
 * max_depth untuk mengontrol kedalaman maksimum dari setiap pohon keputusan dalam ensemble. Makin besar nilai max_depth, semakin kompleks modelnya.
@@ -291,10 +287,10 @@ Kekurangan *Boosting*:
 * Sensitif terhadap parameter dan fungsi loss yang dipilih.
 * Lebih lambat karena harus melatih beberapa model.
   
-Sama seperti sebelumnya, model ini akan menggunakan hyperparameter dari tuning untuk menentukan parameter-parameter yang dibutuhkan dalam pelatihan Model *Boosting* dengan AdaBoost. *GridSearch* tetap menjadi andalan tetentunya dalam menjalankan teknik tersebut. Proses awal pelatihan adalah pemanggilan metode *AdaBoostRegressor* dari library scikit-learn [[10]](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostRegressor.html). Kemudian, proses menginput parameter ke dalam metode tersebut berdasarkan hasil teknik hyperparameter tunning dilakukan. Parameter tersebut adalah *learning_rate* dengan nilai 0.1. Untuk parameter lain yang digunakan dalam permodelan tersebut seperti *random_state* yang merupakan penambahan manual untuk menentukan seed untuk generator angka acak yang digunakan saat membagi data menjadi subset saat membangun pohon sehingga menghasilkan hasil yang sama setiap kali kode dijalankan. Tahapan akhir dalam menjalankan pelatihan ini juga akan dibantu oleh fungsi fit dengan matrix evaluasi yang digunakan adalah *Mean Squared Error atau MSE*.  
+Sama seperti sebelumnya, model ini akan menggunakan hyperparameter dari tuning untuk menentukan parameter-parameter yang dibutuhkan dalam pelatihan Model *Boosting* dengan AdaBoost. *GridSearch* tetap menjadi andalan tetentunya dalam menjalankan teknik tersebut. Proses awal pelatihan adalah pemanggilan metode *AdaBoostRegressor* dari library scikit-learn. Kemudian, proses menginput parameter ke dalam metode tersebut berdasarkan hasil teknik hyperparameter tunning dilakukan. Parameter tersebut adalah *learning_rate*. Parameter learning_rate adalah parameter yang digunakan untuk mengatur kecepatan pembelajaran model. Nilai *learning_rate* yang kecil akan membuat model melatih lebih lambat tapi lebih akurat. Sebaliknya, nilai yang besar akan mempercepat pelatihan model tetapi meningkatkan osilasi dan membuat model tidak konvergen. Pasa proses permodelan kali proses hypertunning menghasilkan nilai *learning_rate* 0.1. Untuk parameter lain yang digunakan dalam permodelan tersebut seperti *random_state* yang merupakan penambahan manual untuk menentukan seed untuk generator angka acak yang digunakan saat membagi data menjadi subset saat membangun pohon sehingga menghasilkan hasil yang sama setiap kali kode dijalankan. Tahapan akhir dalam menjalankan pelatihan ini juga akan dibantu oleh fungsi fit dengan matrix evaluasi yang digunakan adalah *Mean Squared Error atau MSE*.  
 
 ## Evaluasi Model
-Tahap evaluasi dalam membangun model bertujuan untuk mengukur kinerja dan keefektifan model yang telah dibuat. Evaluasi model penting karena memberikan pemahaman tentang seberapa baik model dapat melakukan prediksi atau menggeneralisasi data baru yang tidak terlihat selama pelatihan. Pada tahap ini, penggunaan metrik akan dilakukan. Metrik yang akan digunakan adalah *Mean Squared Eror(MSE)* dari library Scikit-learn [[11]](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html). Metrik ini menghitung jumlah selisih kuadrat rata-rata nilai sebenarnya dengan nilai prediksi melalui sebuah persamaan sebagai berikut:
+Tahap evaluasi dalam membangun model bertujuan untuk mengukur kinerja dan keefektifan model yang telah dibuat. Evaluasi model penting karena memberikan pemahaman tentang seberapa baik model dapat melakukan prediksi atau menggeneralisasi data baru yang tidak terlihat selama pelatihan. Pada tahap ini, penggunaan metrik akan dilakukan. Metrik yang akan digunakan adalah *Mean Squared Eror(MSE)* dari library Scikit-learn. Metrik ini menghitung jumlah selisih kuadrat rata-rata nilai sebenarnya dengan nilai prediksi melalui sebuah persamaan sebagai berikut:
 
 $$MSE = {\sum{(Y_t - Y_p)^2} \over n}$$
 Keterangan:
@@ -361,19 +357,4 @@ Dengan demikian, goals untuk mengetahui fitur yang berpengaruh terhadap harga ju
 [4] L. Putra Nasyuli, I. Lubis, A. Marwan Elhanafi, corresponding author, and F. Teknik Dan Komputer, “Penerapan Model Machine Learning Algoritma Gradient Boosting dan Linear Regression Melakukan Prediksi Harga Kendaraan Bekas Application Of Machine Learning Models and Gradient Boosting Algorithms Doing Linear Regression Vehicle Price Prediction Used,” 2023. Tersedia [tautan](https://jurnal.unity-academy.sch.id/index.php/jirsi/article/view/56/44).
 
 [5] COOPERUNION, Jeffrey Shih, et al. "Car Features and MSRP". Kaggle. 2017. Tersedia: [tautan](https://www.kaggle.com/datasets/CooperUnion/cardataset). Diakses pada: Februari 2024.
-
-[6] Scikit-learn Documentation. "GridSearchCV". Tersedia: [tautan](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html). Diakses pada: Februari 2024.
-
-[7] Scikit-learn Documentation. "KNeighborsClassifier". Tersedia: [tautan](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.GridSearchCV.html). Diakses pada: Februari 2024.
-
-[8] Scikit-learn Documentation. "KNeighborsRegressor". Tersedia: [tautan](https://scikit-learn.org/stable/modules/generated/sklearn.neighbors.KNeighborsRegressor.html). Diakses pada: Februari 2024.
-
-[9] Scikit-learn Documentation. "RandomForestRegressor". Tersedia: [tautan](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.RandomForestRegressor.html). Diakses pada: Februari 2024.
-
-[10] Scikit-learn Documentation. "AdaBoostRegressor". Tersedia: [tautan](https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.AdaBoostRegressor.html). Diakses pada: Februari 2024.
-
-[11] Scikit-learn Documentation. "mean_squared_error". Tersedia: [tautan](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.mean_squared_error.html). Diakses pada: Februari 2024.
-
-[12] Scikit-learn Documentation. "accuracy_score". Tersedia: [tautan](https://scikit-learn.org/stable/modules/generated/sklearn.metrics.accuracy_score.html). Diakses pada: Februari 2024.
-
 
